@@ -30,7 +30,7 @@ var TAIPAN = {
   *
   */
 
-  revision: '0.2.0',
+  revision: '0.2.1',
 
   /**
   * Create a new finite state machine.
