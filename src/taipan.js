@@ -5,7 +5,7 @@ var TAIPAN = {
 
   /**
   * @author Ludovic Cluber <http://www.lcluber.com/contact>
-  * @file Asynchronous assets loader library.
+  * @file Finite State Machine library.
   * @version 0.2.0
   * @copyright (c) 2011 Ludovic Cluber
 
