@@ -6,7 +6,7 @@ var TAIPAN = {
   /**
   * @author Ludovic Cluber <http://www.lcluber.com/contact>
   * @file Finite State Machine library.
-  * @version 0.2.0
+  * @version 0.2.1
   * @copyright (c) 2011 Ludovic Cluber
 
   * @license
@@ -75,8 +75,8 @@ var TAIPAN = {
         this.status[from] = false;
         this.status[to]   = true;
         return true;
-      }else
-        return false;
+      }
+      return false;
     };
   },
 

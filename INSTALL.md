@@ -1,6 +1,6 @@
 ## Taipan.js project installation guide
 
-You just cloned Taipan.js : git clone e.git
+You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
 
 ### Install nodejs 4 on your server :
   - Windows and OSX : **https://nodejs.org/en/**
