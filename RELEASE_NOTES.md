@@ -1,6 +1,6 @@
 Version 0.2.1 (October 26th 2016)
 ------------------------------
- * setStatus() removed useless else statement
+ * setStatus() function modified. Removed useless else statement
 
 Version 0.2.0 (October 22th 2016)
 ------------------------------
