@@ -1,6 +1,6 @@
 ## Synopsis
 
-  A finite state machine is a very good way to keep things in order. Using a sequential logic circuits helps your code to be clean and easy to read.
+  A finite state machine is a very good way to simplify a project when sequential logic is required. It helps your code to stay clean and easy to understand.
 
   It is an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition; this is called a transition. A particular FSM is defined by a list of its states, its initial state, and the triggering condition for each transition.
 
