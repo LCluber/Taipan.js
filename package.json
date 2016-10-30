@@ -2,7 +2,7 @@
     "name" : "Taipanjs",
     "version" : "0.2.1",
     "description":"javascript library",
-    "keywords":["assets loader","asynchronous"],
+    "keywords":["finite state machine"],
     "homepage":"http://taipanjs.lcluber.com",
     "bugs": {
       "url" : "https://github.com/LCluber/Taipan.js/issues"
