@@ -7,6 +7,7 @@ module.exports = function(grunt){
   var src       = [ 'src/' + projectName.toLowerCase() + '.js',
                     'src/states.js',
                   ];
+  var distDir   = 'dist/';
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
@@ -39,7 +40,7 @@ module.exports = function(grunt){
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      dist     : 'dist/',
+      dist     : distDir,
       doc      : 'doc/',
       static   : webDir + 'static/',
       js       : publicDir + 'js/',
@@ -88,7 +89,7 @@ module.exports = function(grunt){
       }
     },
     csslint: {
-      lax: {
+      dist: {
         options: {
           import: false
         },
@@ -141,9 +142,10 @@ module.exports = function(grunt){
           removeComments: true,
           collapseWhitespace: true
         },
-        files: {
-          webDir + 'static/**/*.html': webDir + 'static/**/*.html'
-        }
+        expand: true,
+        cwd: webDir + 'static',
+        src: ['**/*.htm'],
+        dest: webDir + 'static/'
       }
     },
     uglify: {
@@ -154,9 +156,8 @@ module.exports = function(grunt){
           mangle: false,
           compress:false,
         },
-        files: {
-          'dist/' + projectName.toLowerCase() + '.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.js'
       },
       libmin: {
         options: {
@@ -186,9 +187,8 @@ module.exports = function(grunt){
             keep_fnames: false
           }
         },
-        files: {
-          'dist/' + projectName.toLowerCase() + '.min.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.min.js'
       },
       web: {
         options: {
@@ -253,13 +253,25 @@ module.exports = function(grunt){
         dest: publicDir + 'css/style.min.css'
       }
     },
+    symlink: {
+      options: {
+        overwrite: false,
+        force: false
+      },
+      expanded: {
+        expand: true,
+        cwd: publicDir,
+        src: ['**/*'],
+        dest: webDir + 'static/public/'
+      }
+    },
     compress: {
       main: {
         options: {
           archive: 'zip/' + projectName.toLowerCase() + 'js.zip'
         },
         files: [
-          {src: ['dist/*'], dest: '/', filter: 'isFile'},
+          {src: [distDir + '*'], dest: '/', filter: 'isFile'},
           {src: ['doc/**'], dest: '/', filter: 'isFile'},
           {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
           {expand: true, cwd: publicDir, src: '**', dest: '/public'},
@@ -281,17 +293,18 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'csslint', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'symlink', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'jade', 'htmlmin' ]); //build static website into /website/static
+  grunt.registerTask('static', [ 'jade', 'htmlmin', 'symlink' ]); //build static website into /website/static
 
   grunt.registerTask('zip', [ 'compress' ]); //compress the project in a downloadable static package
 
