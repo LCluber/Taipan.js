@@ -2,7 +2,9 @@ module.exports = function(grunt){
 
   require('time-grunt')(grunt);
 
-  var src       = [ 'src/taipan.js',
+  var projectName = 'Taipan';
+
+  var src       = [ 'src/' + projectName.toLowerCase() + '.js',
                     'src/states.js',
                   ];
   var webDir    = 'website/';
@@ -30,7 +32,7 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://www.taipanjs.lcluber.com\n' +
+    '* http://www.' + projectName.toLowerCase() + 'js.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
@@ -85,6 +87,14 @@ module.exports = function(grunt){
         }]
       }
     },
+    csslint: {
+      lax: {
+        options: {
+          import: false
+        },
+        src: [webDir + 'sass/build/**/*.css']
+      }
+    },
     cssmin:{
       options: {
         shorthandCompacting: false,
@@ -125,6 +135,17 @@ module.exports = function(grunt){
         } ]
       }
     },
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          webDir + 'static/**/*.html': webDir + 'static/**/*.html'
+        }
+      }
+    },
     uglify: {
       lib: {
         options: {
@@ -134,7 +155,7 @@ module.exports = function(grunt){
           compress:false,
         },
         files: {
-          'dist/taipan.js': src
+          'dist/' + projectName.toLowerCase() + '.js': src
         }
       },
       libmin: {
@@ -143,7 +164,7 @@ module.exports = function(grunt){
           sourceMapName: 'src/sourcemap.map',
           banner: banner,
           mangle: {
-            except: ['TAIPAN'],
+            except: [projectName.toUpperCase()],
           },
           compress: {
             sequences: true,
@@ -166,7 +187,7 @@ module.exports = function(grunt){
           }
         },
         files: {
-          'dist/taipan.min.js': src
+          'dist/' + projectName.toLowerCase() + '.min.js': src
         }
       },
       web: {
@@ -235,7 +256,7 @@ module.exports = function(grunt){
     compress: {
       main: {
         options: {
-          archive: 'zip/taipanjs.zip'
+          archive: 'zip/' + projectName.toLowerCase() + 'js.zip'
         },
         files: [
           {src: ['dist/*'], dest: '/', filter: 'isFile'},
@@ -254,22 +275,24 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'csslint', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs' ]); //build js into /website/public/js
-  grunt.registerTask('css', [ 'sass', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'jade' ]); //build static site into /website/static
+  grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
+  grunt.registerTask('static', [ 'jade', 'htmlmin' ]); //build static website into /website/static
 
-  grunt.registerTask('zip', ['compress']); //compress the project in a downloadable static package
+  grunt.registerTask('zip', [ 'compress' ]); //compress the project in a downloadable static package
 
 };
