@@ -6,7 +6,7 @@
 
 ## Code Example
 
- [See a basic example on the dedicated website](http://taipanjs.lcluber.com/#example).
+ [See a basic example on the dedicated website](http://taipanjs.lcluber.com/#source).
 
 ## Motivation
 
