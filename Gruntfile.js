@@ -2,9 +2,12 @@ module.exports = function(grunt){
 
   require('time-grunt')(grunt);
 
-  var src       = [ 'src/taipan.js',
+  var projectName = 'Taipan';
+
+  var src       = [ 'src/' + projectName.toLowerCase() + '.js',
                     'src/states.js',
                   ];
+  var distDir   = 'dist/';
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
@@ -30,14 +33,14 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://www.taipanjs.lcluber.com\n' +
+    '* http://www.' + projectName.toLowerCase() + 'js.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      dist     : 'dist/',
+      dist     : distDir,
       doc      : 'doc/',
       static   : webDir + 'static/',
       js       : publicDir + 'js/',
@@ -85,6 +88,14 @@ module.exports = function(grunt){
         }]
       }
     },
+    csslint: {
+      dist: {
+        options: {
+          import: false
+        },
+        src: [webDir + 'sass/build/**/*.css']
+      }
+    },
     cssmin:{
       options: {
         shorthandCompacting: false,
@@ -125,6 +136,18 @@ module.exports = function(grunt){
         } ]
       }
     },
+    htmlmin: {
+      static: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        expand: true,
+        cwd: webDir + 'static',
+        src: ['**/*.htm'],
+        dest: webDir + 'static/'
+      }
+    },
     uglify: {
       lib: {
         options: {
@@ -133,9 +156,8 @@ module.exports = function(grunt){
           mangle: false,
           compress:false,
         },
-        files: {
-          'dist/taipan.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.js'
       },
       libmin: {
         options: {
@@ -143,7 +165,7 @@ module.exports = function(grunt){
           sourceMapName: 'src/sourcemap.map',
           banner: banner,
           mangle: {
-            except: ['TAIPAN'],
+            except: [projectName.toUpperCase()],
           },
           compress: {
             sequences: true,
@@ -165,9 +187,8 @@ module.exports = function(grunt){
             keep_fnames: false
           }
         },
-        files: {
-          'dist/taipan.min.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.min.js'
       },
       web: {
         options: {
@@ -232,13 +253,25 @@ module.exports = function(grunt){
         dest: publicDir + 'css/style.min.css'
       }
     },
+    symlink: {
+      options: {
+        overwrite: false,
+        force: false
+      },
+      expanded: {
+        expand: true,
+        cwd: publicDir,
+        src: ['**/*'],
+        dest: webDir + 'static/public/'
+      }
+    },
     compress: {
       main: {
         options: {
-          archive: 'zip/taipanjs.zip'
+          archive: 'zip/' + projectName.toLowerCase() + 'js.zip'
         },
         files: [
-          {src: ['dist/*'], dest: '/', filter: 'isFile'},
+          {src: [distDir + '*'], dest: '/', filter: 'isFile'},
           {src: ['doc/**'], dest: '/', filter: 'isFile'},
           {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
           {expand: true, cwd: publicDir, src: '**', dest: '/public'},
@@ -254,22 +287,25 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'symlink', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs' ]); //build js into /website/public/js
-  grunt.registerTask('css', [ 'sass', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'jade' ]); //build static site into /website/static
+  grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
+  grunt.registerTask('static', [ 'jade', 'htmlmin', 'symlink' ]); //build static website into /website/static
 
-  grunt.registerTask('zip', ['compress']); //compress the project in a downloadable static package
+  grunt.registerTask('zip', [ 'compress' ]); //compress the project in a downloadable static package
 
 };
