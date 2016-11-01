@@ -65,23 +65,12 @@ block content
         p Instantiate a state machine with an array of states in parameter.
         pre. 
           var fsm = TAIPAN.create([
-            { name: 'start',    from: 'idle',    to: 'running' },
-            { name: 'play',     from: 'paused',  to: 'running' },
-            { name: 'pause',    from: 'running', to: 'paused' },
-            { name: 'stop',     from: 'paused',  to: 'idle' }
+            { name: 'play',  from: 'paused',  to: 'running' },
+            { name: 'pause', from: 'running', to: 'paused' }
           ]);
         
         p Change the state of the machine and do your actions
         pre.
-          function start(){
-            if( fsm.start() ){
-              //your code for starting the sequence
-            }else{
-              //invalid request. The current state does not allow to go to the "running" state
-            }
-            return fsm.getStatus();
-          }
-          
           function play(){
             if( fsm.play() ){
               //your code for playing the sequence
@@ -99,16 +88,6 @@ block content
             }
             return fsm.getStatus();
           }
-          
-          function stop(){
-            if( fsm.stop() ){
-              //your code for stopping the sequence
-            }else{
-              //invalid request. The current state does not allow to go to the "idle" state
-            }
-            return fsm.getStatus();
-          }
-
   
   section( id='download' class='container content-section text-center' )
     div( class='row' )
