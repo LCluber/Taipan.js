@@ -6,7 +6,7 @@
 
 ## Code Example
 
- [See a basic example on the dedicated website](http://taipanjs.lcluber.com/#example).
+ [See a basic example on the dedicated website](http://taipanjs.lcluber.com/#source).
 
 ## Motivation
 
@@ -31,7 +31,9 @@ To contribute you can clone the project on **[GitHub](https://github.com/LCluber
 
 ## License
 
-Copyright (c) 2015 Ludovic CLUBER.
+MIT License
+
+Copyright (c) 2015 Ludovic CLUBER
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
