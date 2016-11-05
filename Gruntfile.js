@@ -236,6 +236,9 @@ module.exports = function(grunt){
         },
         src: [nodeDir + 'jquery/dist/jquery.min.js',
               nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
+              //webDir + 'libs/*.js',
+              // distDir + 'taipan.js',
+              //distDir + 'taipan.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -258,11 +261,17 @@ module.exports = function(grunt){
         overwrite: false,
         force: false
       },
-      expanded: {
+      public: {
         expand: true,
         cwd: publicDir,
         src: ['**/*'],
         dest: webDir + 'static/public/'
+      },
+      doc: {
+        expand: true,
+        cwd: 'doc/',
+        src: ['**/*'],
+        dest: webDir + 'static/doc/'
       }
     },
     compress: {
@@ -297,7 +306,9 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'symlink', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'symlink', 'compress' ]); //build all
+
+  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
