@@ -236,6 +236,9 @@ module.exports = function(grunt){
         },
         src: [nodeDir + 'jquery/dist/jquery.min.js',
               nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
+              //webDir + 'libs/*.js',
+              // distDir + 'taipan.js',
+              //distDir + 'taipan.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -258,11 +261,17 @@ module.exports = function(grunt){
         overwrite: false,
         force: false
       },
-      expanded: {
+      public: {
         expand: true,
         cwd: publicDir,
         src: ['**/*'],
         dest: webDir + 'static/public/'
+      },
+      doc: {
+        expand: true,
+        cwd: 'doc/',
+        src: ['**/*'],
+        dest: webDir + 'static/doc/'
       }
     },
     compress: {
