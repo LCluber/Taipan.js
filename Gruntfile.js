@@ -311,7 +311,7 @@ module.exports = function(grunt){
   grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
-  grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
+  grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build library into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
