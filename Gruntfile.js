@@ -4,13 +4,16 @@ module.exports = function(grunt){
 
   var projectName = 'Taipan';
 
-  var src       = [ 'src/' + projectName.toLowerCase() + '.js',
-                    'src/states.js',
-                  ];
+  var srcDir    = 'src/';
   var distDir   = 'dist/';
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
+
+  var src       = [ srcDir + projectName.toLowerCase() + '.js',
+                    srcDir + 'states.js',
+                  ];
+
   var banner    = '/** MIT License\n' +
     '* \n' +
     '* Copyright (c) 2015 Ludovic CLUBER \n' +
@@ -71,7 +74,7 @@ module.exports = function(grunt){
       options: {
         jshintrc: 'config/.jshintrc'
       },
-      lib: [ 'Gruntfile.js', 'src/**/*.js'],
+      lib: [ 'Gruntfile.js', srcDir + '**/*.js'],
       web: [ webDir + 'js/**/*.js'],
     },
     sass: {
@@ -162,7 +165,7 @@ module.exports = function(grunt){
       libmin: {
         options: {
           sourceMap: false,
-          sourceMapName: 'src/sourcemap.map',
+          sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
             except: [projectName.toUpperCase()],
@@ -193,7 +196,7 @@ module.exports = function(grunt){
       web: {
         options: {
           sourceMap: false,
-          sourceMapName: 'src/sourcemap.map',
+          sourceMapName: srcDir + 'sourcemap.map',
           banner: '',
           mangle: {
             except: ['jQuery']
