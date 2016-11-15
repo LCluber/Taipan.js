@@ -33,7 +33,7 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://www.' + projectName.toLowerCase() + 'js.lcluber.com\n' +
+    '* http://' + projectName.toLowerCase() + 'js.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
@@ -114,7 +114,7 @@ module.exports = function(grunt){
         config: 'config/jsdoc-conf.json'
       }
     },
-    jade: {
+    pug: {
       compile: {
         options: {
           namespace   : 'JST',
@@ -129,7 +129,7 @@ module.exports = function(grunt){
         },
         files: [ {
           cwd: webDir + 'views',
-          src: ['**/*.jade', '!**/_*.jade'],
+          src: ['**/*.pug', '!**/_*.pug'],
           dest: webDir + 'static',
           expand: true,
           ext: '.htm'
@@ -236,9 +236,6 @@ module.exports = function(grunt){
         },
         src: [nodeDir + 'jquery/dist/jquery.min.js',
               nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
-              //webDir + 'libs/*.js',
-              // distDir + 'taipan.js',
-              //distDir + 'taipan.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -299,23 +296,23 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'symlink', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'symlink', 'compress' ]); //build all
 
-  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
+  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build library into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'jade', 'htmlmin', 'symlink' ]); //build static website into /website/static
+  grunt.registerTask('static', [ 'pug', 'htmlmin', 'symlink' ]); //build static website into /website/static
 
   grunt.registerTask('zip', [ 'compress' ]); //compress the project in a downloadable static package
 
