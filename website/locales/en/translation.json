@@ -1,0 +1,38 @@
+{
+  "menu" : { 
+    "menu"          : "Menu",
+    "home"          : "Home",
+    "about"         : "About",
+    "example"       : "Example",
+    "code"          : "Code",
+    "download"      : "Download",
+    "documentation" : "Documentation",
+    "contact"       : "Contact"
+  },
+  "section" : {
+    "home" : {
+      "h1" : "Taipan.js",
+      "description" : "An open source finite state machine written in Javascript."
+    },
+    "about" : {
+      "h2" : "About"
+    },
+    "code" : {
+      "h2" : "Code",
+      "h3" : "Javascript (main.js)"
+    },
+    "download" : {
+      "h2" : "Download Taipan.js",
+      "min" : "Taipan.min.js",
+      "zip" : "Taipanjs.zip",
+      "github" : "Clone from Github"
+    },
+    "contact" : {
+      "h2" : "Contact me",
+      "description" : "Feel free to ask me about my work, give me suggestions, or just to say hi.",
+      "website" : "lcluber.com"
+    }
+  },
+  "github":"Github",
+  "twitter":"Twitter"
+}

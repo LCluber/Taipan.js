@@ -1,0 +1,12 @@
+{
+  "toto" : "Tata",
+  "menu" : { 
+    "home"          : "Home",
+    "about"         : "About",
+    "example"       : "Example",
+    "code"          : "Code",
+    "download"      : "Download",
+    "documentation" : "Documentation",
+    "contact"       : "Contact"
+  }
+}

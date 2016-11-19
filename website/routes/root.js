@@ -5,7 +5,7 @@ router.get('/:page', function(req, res) {
   var prms = req.params;
   //console.log(prms);
   res.render(prms.page, {
-
+    
   });
 });
 
