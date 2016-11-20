@@ -1,12 +1,32 @@
 {
-  "toto" : "Tata",
   "menu" : { 
-    "home"          : "Home",
-    "about"         : "About",
-    "example"       : "Example",
+    "menu"          : "Menu",
+    "home"          : "Accueil",
+    "about"         : "Présentation",
+    "example"       : "Exemple",
     "code"          : "Code",
-    "download"      : "Download",
+    "download"      : "Téléchargement",
     "documentation" : "Documentation",
     "contact"       : "Contact"
+  },
+  "section" : {
+    "home" : {
+      "description" : "Automate fini développé en Javascript."
+    },
+    "about" : {
+      "h2" : "Présentation"
+    },
+    "code" : {
+      "h2" : "Code",
+      "h3" : "Javascript (main.js)"
+    },
+    "download" : {
+      "h2" : "Téléchargez Taipan.js",
+      "github" : "Clonez sur Github"
+    },
+    "contact" : {
+      "h2" : "Contactez moi",
+      "description" : "N'hésitez pas à me contacter au sujet de mon travail, pour me soumettre vos suggestions, ou simplement pour dire bonjour."
+    }
   }
 }
