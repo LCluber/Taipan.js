@@ -29,8 +29,9 @@ You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
 
 
 ### Workflow
-  - Run **grunt** to build the app. 
-  - Run **grunt serve** to serve files, open the website, watch for changes and start working.
+  - Use **grunt --help** to see the list of tasks.
+  - Run **grunt dist** to build the app in production mode. 
+  - Run **grunt serve** to serve files in development mode, open the website, watch for changes and start working.
 
   - You can use those commands if you don't like grunt-watch :
     - **grunt doc** builds the static documentation,
