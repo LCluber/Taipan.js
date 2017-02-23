@@ -132,10 +132,6 @@ module.exports = function(grunt){
           self        : false,
           debug       : false,
           compileDebug: true,
-          //i18n specific options
-          i18n: {
-            locales: webDir + 'locales/en/translation.json'
-          },
           data: function() {
             return {
               t: i18n.t.bind(i18n)
