@@ -50,7 +50,7 @@ module.exports = function(grunt){
     lng: 'en',
     resources: {
       en: {
-        translation: grunt.file.read( webDir + 'locales/en/translation.json' )
+        translation: grunt.file.readJSON( webDir + 'locales/en/translation.json' )
       }
     }
   });
@@ -138,7 +138,7 @@ module.exports = function(grunt){
           },
           data: function() {
             return {
-              t: i18n.t
+              t: i18n.t.bind(i18n)
             };
           }
         },
@@ -373,7 +373,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-pug' );
-  grunt.loadNpmTasks( 'grunt-pug-i18n' );
+  //grunt.loadNpmTasks( 'grunt-pug-i18n' );
   grunt.loadNpmTasks( 'grunt-contrib-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
   grunt.loadNpmTasks( 'grunt-contrib-symlink' );
