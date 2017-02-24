@@ -44,6 +44,17 @@ module.exports = function(grunt){
     '* http://' + projectName.toLowerCase() + 'js.lcluber.com\n' +
     '*/\n';
 
+  //i18n configuration for static website translations
+  var i18n = require('i18next');
+  i18n.init({
+    lng: 'en',
+    resources: {
+      en: {
+        translation: grunt.file.readJSON( webDir + 'locales/en/translation.json' )
+      }
+    }
+  });
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -121,7 +132,11 @@ module.exports = function(grunt){
           self        : false,
           debug       : false,
           compileDebug: true,
-          globals     : []
+          data: function() {
+            return {
+              t: i18n.t.bind(i18n)
+            };
+          }
         },
         files: [ {
           cwd: webDir + 'views',
@@ -354,6 +369,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-pug' );
+  //grunt.loadNpmTasks( 'grunt-pug-i18n' );
   grunt.loadNpmTasks( 'grunt-contrib-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
   grunt.loadNpmTasks( 'grunt-contrib-symlink' );
