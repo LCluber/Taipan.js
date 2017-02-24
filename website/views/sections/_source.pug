@@ -5,14 +5,16 @@ section( id='source' class='container content-section text-center' )
       
       h3=t('section.code.h3')
       
-      p Instantiate a state machine with an array of states in parameter.
+      p=t('section.code.p1')
+      
       pre.
         var fsm = TAIPAN.create([
           { name: 'play',  from: 'paused',  to: 'running' },
           { name: 'pause', from: 'running', to: 'paused' }
         ]);
       
-      p Change the state of the machine and do your actions
+      p=t('section.code.p2')
+      
       pre.
         function play(){
           if( fsm.play() ){

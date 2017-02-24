@@ -21,7 +21,9 @@
     },
     "code" : {
       "h2" : "Code",
-      "h3" : "Javascript (main.js)"
+      "h3" : "Javascript (main.js)",
+      "p1" : "Instantiate a state machine with an array of states in parameter.",
+      "p2" : "Change the state of the machine and do your actions."
     },
     "download" : {
       "h2" : "Download Taipan.js",
