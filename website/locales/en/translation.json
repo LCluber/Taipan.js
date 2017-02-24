@@ -16,7 +16,8 @@
       "description" : "An open source finite state machine written in Javascript."
     },
     "about" : {
-      "h2" : "About"
+      "h2" : "About",
+      "text" : "<p>A finite state machine is a very good way to keep things in order. Using a sequential logic circuits helps your code to be clean and easy to read.</p><p>It is an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition; this is called a transition. A particular FSM is defined by a list of its states, its initial state, and the triggering condition for each transition.</p><p>Check the <a href=\"#source\" class=\"page-scroll\">Code</a> section for more information on how to use Taipan.js.<br/>There is also a <a href=\"doc/index.html\" target=\"_blank\" class=\"page-scroll\">documentation</a> if you need to go deeper.</p><p> You can help develop Taipan.js on <a href=\"https://github.com/LCluber\" target=\"_blank\">Github</a>.</p>"
     },
     "code" : {
       "h2" : "Code",

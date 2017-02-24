@@ -15,7 +15,8 @@ var i18nBackendOptions = {
       jsonIndent: 2,
       allowMultiLoading: true
     };
-var i18nOptions        = {
+var i18nOptions = {
+      debug: false,
       lngs: ['en', 'fr'],
       whitelist: ['en', 'fr'],
       fallbackLng: 'en',
@@ -24,8 +25,8 @@ var i18nOptions        = {
     };
 
 //routes
-var route_root    = require('./routes/root');
-var route_doc     = require('./routes/doc');
+var route_root = require('./routes/root');
+var route_doc  = require('./routes/doc');
   
 var app = express();
 
