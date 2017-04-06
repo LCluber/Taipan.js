@@ -425,7 +425,7 @@ module.exports = function(grunt){
                       [ 'jshint:lib',
                         'clean:lib',
                         'uglify:lib', 'uglify:libmin', 'uglify:web',
-                        'concat:lib', 'concat:libmin'
+                        'concat:webjs'
                       ]
                     );
 
