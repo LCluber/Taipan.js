@@ -383,12 +383,36 @@ module.exports = function(grunt){
 
   grunt.registerTask( 'dist',
                       'build release distribution for prosuction',
-                      [ 'jshint', 'clean', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'symlink:fonts', 'symlink:fontAwesome', 'concat', 'symlink:public', 'symlink:doc', 'htmlmin', 'compress' ]
+                      [ 'jshint:lib', 'jshint:web',
+                        'clean:lib', 'clean:web',
+                        'jsdoc',
+                        'sass',
+                        'cssmin',
+                        'pug',
+                        'uglify:lib', 'uglify:libmin', 'uglify:web',
+                        'symlink:fonts', 'symlink:fontAwesome',
+                        'concat:webjs', 'concat:webcss',
+                        'symlink:public', 'symlink:doc',
+                        'htmlmin',
+                        'compress'
+                      ]
                     );
 
   grunt.registerTask( 'serve',
                       'serve files, open website and watch for changes.',
-                      [ 'jshint', 'clean', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'symlink:fonts', 'symlink:fontAwesome', 'concat', 'symlink:public', 'symlink:doc', 'compress', 'concurrent' ]
+                      [ 'jshint:lib', 'jshint:web',
+                        'clean:lib', 'clean:web',
+                        'jsdoc',
+                        'sass',
+                        'cssmin',
+                        'pug',
+                        'uglify:lib', 'uglify:libmin', 'uglify:web',
+                        'symlink:fonts', 'symlink:fontAwesome',
+                        'concat:webjs', 'concat:webcss',
+                        'symlink:public', 'symlink:doc',
+                        'compress',
+                        'concurrent'
+                      ]
                     );
 
   grunt.registerTask( 'doc',
@@ -398,22 +422,36 @@ module.exports = function(grunt){
 
   grunt.registerTask( 'src',
                       'build library into /dist',
-                      [ 'jshint:lib', 'clean:lib', 'uglify', 'concat:lib', 'concat:libmin']
+                      [ 'jshint:lib',
+                        'clean:lib',
+                        'uglify:lib', 'uglify:libmin', 'uglify:web',
+                        'concat:lib', 'concat:libmin'
+                      ]
                     );
 
   grunt.registerTask( 'website:js',
                       'build necessary js files for website into /website/public/js',
-                      [ 'jshint:web', 'uglify:web', 'concat:webjs' ]
+                      [ 'jshint:web',
+                        'uglify:web',
+                        'concat:webjs'
+                      ]
                     );
 
   grunt.registerTask( 'website:css',
                       'build sass for website into /website/public/css',
-                      [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]
+                      [ 'sass',
+                        'csslint',
+                        'cssmin',
+                        'concat:webcss'
+                      ]
                     );
 
   grunt.registerTask( 'website:static',
                       'build static version of the website into /website/static',
-                      [ 'pug', 'htmlmin', 'symlink:fonts', 'symlink:fontAwesome', 'symlink:public', 'symlink:doc' ]
+                      [ 'pug',
+                        'htmlmin',
+                        'symlink:fonts', 'symlink:fontAwesome', 'symlink:public', 'symlink:doc'
+                      ]
                     );
 
   grunt.registerTask( 'zip',
