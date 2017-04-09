@@ -30,22 +30,19 @@ You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
 
 ### Workflow
   - Use **grunt --help** to see the list of tasks.
-  - Run **grunt dist** to build the app in production mode. 
-  - Run **grunt serve** to serve files in development mode, open the website, watch for changes and start working.
+  - Run **grunt** build library, website, launch server, open website and watch for changes.
 
-  - You can use those commands if you don't like grunt-watch :
-    - **grunt doc** builds the static documentation,
-    - **grunt src** builds the library in the dist folder,
-    - **grunt js** builds javascript for the website,
-    - **grunt css** builds CSS for the website,
-    - **grunt static** builds the static version of the website,
-    - **grunt zip** builds the downloadable zip.
-    - **grunt watch** builds the library automatically on files modifications.
-    - Start Express server :
+  - You can use those commands to build specific parts :
+    - **grunt doc** build the documentation in the doc/ folder,
+    - **grunt lib** build the library in the dist/ folder and the documentation in the doc/ folder,
+    - **grunt website** build the website in the website/ folder,
+    - **grunt dist** build library and website,
+    - **grunt serve** launch server, open website and watch for changes,
+    - Start Express server manually :
       - Windows : Run **set DEBUG=Taipanjs:* & npm start**
       - Linux / OSX : Run **DEBUG=Taipanjs:* npm start**
     - Go to **http://localhost:3004/** to test the app.
-    - Keep in mind running **grunt serve** once will do all this automatically.
+    - Keep in mind running **grunt** once will do all this automatically.
     
     
   - Set node environment if needed : 
