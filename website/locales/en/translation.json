@@ -22,8 +22,8 @@
     "code" : {
       "h2" : "Code",
       "h3" : "Javascript (main.js)",
-      "p1" : "Instantiate a state machine with an array of states in parameter.",
-      "p2" : "Change the state of the machine and do your actions."
+      "p1" : "Instantiate a state machine with an array of events as parameter.",
+      "p2" : "activate traffic lights. The finite state machine executes authorized operations only."
     },
     "download" : {
       "h2" : "Download Taipan.js",

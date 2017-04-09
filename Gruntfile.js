@@ -180,7 +180,7 @@ module.exports = function(grunt){
           sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
-            except: [projectName.toUpperCase()],
+            except: [projectName],
           },
           compress: {
             sequences: true,
@@ -249,9 +249,10 @@ module.exports = function(grunt){
           stripBanners: true,
           banner: ''
         },
-        src: [nodeDir + 'jquery/dist/jquery.min.js',
-              nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
-              publicDir + 'js/main.min.js'
+        src: [  nodeDir   + 'jquery/dist/jquery.min.js',
+                nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
+                distDir   + projectNameLC + '.min.js',
+                publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
       },

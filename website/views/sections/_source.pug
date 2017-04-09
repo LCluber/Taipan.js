@@ -9,27 +9,23 @@ section( id='source' class='container content-section text-center' )
       
       pre.
         var fsm = TAIPAN.create([
-          { name: 'play',  from: 'paused',  to: 'running' },
-          { name: 'pause', from: 'running', to: 'paused' }
+          { name: 'greenOn',  from: 'red',  to: 'green' },
+          { name: 'orangeOn', from: 'green', to: 'orange' },
+          { name: 'redOn',    from: 'orange',  to: 'red' }
         ]);
       
       p=t('section.code.p2')
       
       pre.
-        function play(){
-          if( fsm.play() ){
-            //your code for playing the sequence
-          }else{
-            //invalid request. The current state does not allow to go to the "running" state
-          }
-          return fsm.getStatus();
-        }
+        //initialization
+        switchOn(lights[fsm.getStatus()]);
         
-        function pause(){
-          if( fsm.pause() ){
-            //your code for pausing the sequence
-          }else{
-            //invalid request. The current state does not allow to go to the "pause" state
+        //turn requested light on if finite state machine authorizes it
+        function changeLight(light){
+          var eventName = light + 'On';
+          if(fsm[eventName]()) {
+            transition();
+            switchOn(lights[light]);
           }
-          return fsm.getStatus();
+          console.log(fsm.getStatus());
         }
