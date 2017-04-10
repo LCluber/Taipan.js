@@ -24,8 +24,8 @@ section( id='source' class='container content-section text-center' )
         function changeLight(light){
           var eventName = light + 'On';
           if(fsm[eventName]()) {
-            transition();
-            switchOn(lights[light]);
+            transition(); //switch lights off
+            switchOn(lights[light]); //switch requested light on
           }
           console.log(fsm.getStatus());
         }

@@ -17,12 +17,13 @@ switchOn(lights[fsm.getStatus()]);
 function changeLight(light){
   var eventName = light + 'On';
   if(fsm[eventName]()) {
-    transition();
-    switchOn(lights[light]);
+    transition(); //switch lights off
+    switchOn(lights[light]); //switch requested light on
   }
   console.log(fsm.getStatus());
 }
 
+//switch lights off
 function transition(){
   for (var property in lights) {
     if (lights.hasOwnProperty(property)) {
@@ -31,11 +32,13 @@ function transition(){
   }
 }
 
+//switch requested light off
 function switchOff(light){
   light.style.opacity = 0.4; //For real browsers;
   light.style.filter = "alpha(opacity=40)"; //For IE;
 }
 
+//switch requested light on
 function switchOn(light){
   light.style.opacity = 1.0; //For real browsers;
   light.style.filter = "alpha(opacity=100)"; //For IE;
