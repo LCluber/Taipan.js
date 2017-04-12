@@ -26,41 +26,47 @@ var TAIPAN = {
     revision: "0.2.1",
     create: function(config) {
         var _this = Object.create(this);
-        _this.config = config;
-        _this.status = TAIPAN.States.create(_this.config);
-        _this.createEvents();
+        _this.states = this.createStates(config);
+        _this.createEvents(config);
         return _this;
     },
-    createEvents: function() {
-        for (var i = 0; i < this.config.length; i++) {
-            var event = this.config[i];
-            if (!this.hasOwnProperty(event.name)) this[event.name] = this.setStatus(event.from, event.to);
+    createStates: function(config) {
+        var states = {};
+        for (var i = 0; i < config.length; i++) {
+            var event = config[i];
+            if (!states.hasOwnProperty(event.from)) {
+                states[event.from] = i ? false : true;
+            }
+            if (!states.hasOwnProperty(event.to)) {
+                states[event.to] = false;
+            }
+        }
+        return states;
+    },
+    createEvents: function(config) {
+        for (var i = 0; i < config.length; i++) {
+            var event = config[i];
+            if (!this.hasOwnProperty(event.name)) {
+                this[event.name] = this.setStatus(event.from, event.to);
+            }
         }
     },
     getStatus: function() {
-        for (var property in this.status) if (this.status[property] === true) return property;
+        for (var property in this.states) {
+            if (this.states[property] === true) {
+                return property;
+            }
+        }
         return false;
     },
     setStatus: function(from, to) {
         return function() {
-            if (this.status[from] === true) {
-                this.status[from] = false;
-                this.status[to] = true;
+            if (this.states[from] === true) {
+                this.states[from] = false;
+                this.states[to] = true;
                 return true;
             }
             return false;
         };
-    }
-};
-
-TAIPAN.States = {
-    create: function(config) {
-        var _this = Object.create(this);
-        for (var i = 0; i < config.length; i++) {
-            var event = config[i];
-            if (!this.hasOwnProperty(event.from)) this[event.from] = i ? false : true;
-            if (!this.hasOwnProperty(event.to)) this[event.to] = false;
-        }
-        return _this;
     }
 };
