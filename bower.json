@@ -1,6 +1,6 @@
 {
   "author": "Ludovic Cluber",
-  "name": "Taipanjs",
+  "name": "taipanjs",
   "main": [
     "dist/taipan.js"
   ],
