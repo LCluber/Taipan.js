@@ -179,7 +179,7 @@ module.exports = function(grunt){
           sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
-            except: [projectName],
+            except: [projectName]
           },
           compress: {
             sequences: true,

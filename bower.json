@@ -1,0 +1,12 @@
+{
+  "author": "Ludovic Cluber",
+  "name": "Taipanjs",
+  "main": [
+    "dist/taipan.js"
+  ],
+  "description": "Finite state machine written in Javascript.",
+  "version": "0.2.1",
+  "dependencies": {
+  
+  }
+}
