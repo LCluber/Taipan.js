@@ -22,6 +22,7 @@
 *
 * http://taipanjs.lcluber.com
 */
+
 var TAIPAN = {
     revision: "0.2.1",
     create: function(config) {

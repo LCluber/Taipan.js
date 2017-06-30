@@ -179,7 +179,7 @@ module.exports = function(grunt){
           sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
-            except: [projectName]
+            reserved: [projectName]
           },
           compress: {
             sequences: true,
@@ -210,7 +210,7 @@ module.exports = function(grunt){
           sourceMapName: srcDir + 'sourcemap.map',
           banner: '',
           mangle: {
-            except: ['jQuery']
+            reserved: ['jQuery']
           },
           compress: {
             sequences: true,
