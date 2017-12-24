@@ -8,13 +8,14 @@ module.exports = function(grunt){
   var port      = 3004;
   var host      = 'localhost';
 
-  var srcDir    = 'src/';
-  var distDir   = 'dist/';
-  var webDir    = 'website/';
-  var publicDir = webDir + 'public/';
-  var nodeDir   = 'node_modules/';
-  var docDir    = 'doc/';
-  var zipDir    = 'zip/';
+  var srcDir          = 'src/';
+  var compiledSrcDir  = srcDir + 'ts/build/';
+  var distDir         = 'dist/';
+  var webDir          = 'website/';
+  var publicDir       = webDir + 'public/';
+  var nodeDir         = 'node_modules/';
+  var docDir          = 'doc/';
+  var zipDir          = 'zip/';
 
   var src       = [ srcDir + projectNameLC + '.js'
                   ];
@@ -54,7 +55,7 @@ module.exports = function(grunt){
       }
     }
   });
-
+  grunt.option('stack', true);
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -162,6 +163,42 @@ module.exports = function(grunt){
         dest: webDir + 'static/'
       }
     },
+    tslint: {
+      options: {
+        configuration: 'config/tslint.json',
+        force: false
+      },
+      lib: {
+        files: [{
+          expand: true,
+          cwd: srcDir, 
+          src: [ srcDir + '**/*.ts' ]
+        }]
+      }
+    },
+    ts: {
+      tsconfig: 'config/tsconfig.json',
+      lib : {
+        outDir: compiledSrcDir,
+        options: {
+          rootDir: srcDir + 'ts/',
+          declaration: false
+        },
+        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
+      }
+    },
+    rollup: {
+      options: {
+        format:'umd',
+        moduleName: projectName
+      },
+      bundle:{
+        files: [ {
+          src : compiledSrcDir + projectNameLC + '.js', 
+          dest : distDir + projectNameLC + '.js' 
+        } ]
+      }
+    },
     uglify: {
       lib: {
         options: {
@@ -170,7 +207,7 @@ module.exports = function(grunt){
           mangle: false,
           compress:false,
         },
-        src: src,
+        src: distDir + projectNameLC + '.js',
         dest: distDir + projectNameLC + '.js'
       },
       libmin: {
@@ -201,7 +238,7 @@ module.exports = function(grunt){
             keep_fnames: false
           }
         },
-        src: src,
+        src: distDir + projectNameLC + '.js',
         dest: distDir + projectNameLC + '.min.js'
       },
       web: {
@@ -336,7 +373,7 @@ module.exports = function(grunt){
     },
     watch: {
       lib: {
-        files: srcDir + '**/*.js',
+        files: srcDir + 'ts/**/*.ts',
         tasks: ['dist'],  
       },
       webpug:{
@@ -382,13 +419,18 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-concurrent' );
   grunt.loadNpmTasks( 'grunt-nodemon' );
   grunt.loadNpmTasks( 'grunt-open' );
+  grunt.loadNpmTasks( 'grunt-tslint' );
+  grunt.loadNpmTasks( 'grunt-ts' );
+  grunt.loadNpmTasks( 'grunt-rollup' );
 
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
-                      [ 'jshint:lib',
+                      [ 'tslint:lib',
                         'clean:lib',
-                        'uglify:lib', 'uglify:libmin',
-                        'jsdoc'
+                        'ts:lib',
+                        'rollup',
+                        'uglify:libmin', 'uglify:lib'
+                        //'jsdoc'
                       ]
                     );
 
