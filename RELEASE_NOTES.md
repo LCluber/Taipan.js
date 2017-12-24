@@ -1,3 +1,8 @@
+Version 0.3.0 (December 24th 2017)
+------------------------------
+ * changed state type to simplify the code
+ * Library is written in typescript
+
 Version 0.2.1 (October 26th 2016)
 ------------------------------
  * setStatus() function modified. Removed useless else statement

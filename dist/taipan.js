@@ -23,51 +23,38 @@
 * http://taipanjs.lcluber.com
 */
 
-var TAIPAN = {
-    revision: "0.2.1",
-    create: function(config) {
-        var _this = Object.create(this);
-        _this.states = this.createStates(config);
-        _this.createEvents(config);
-        return _this;
-    },
-    createStates: function(config) {
-        var states = {};
-        for (var i = 0; i < config.length; i++) {
-            var event = config[i];
-            if (!states.hasOwnProperty(event.from)) {
-                states[event.from] = i ? false : true;
-            }
-            if (!states.hasOwnProperty(event.to)) {
-                states[event.to] = false;
-            }
-        }
-        return states;
-    },
-    createEvents: function(config) {
-        for (var i = 0; i < config.length; i++) {
-            var event = config[i];
-            if (!this.hasOwnProperty(event.name)) {
-                this[event.name] = this.setStatus(event.from, event.to);
+(function(global, factory) {
+    typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define([ "exports" ], factory) : factory(global.TAIPAN = {});
+})(this, function(exports) {
+    "use strict";
+    var FSM = function() {
+        function FSM(events) {
+            var _this = this;
+            this.state = events[0].from;
+            var _loop_1 = function(event_1) {
+                if (!this_1.hasOwnProperty(event_1.name)) {
+                    this_1[event_1.name] = function() {
+                        if (_this.state == event_1.from) {
+                            _this.state = event_1.to;
+                            return true;
+                        }
+                        return false;
+                    };
+                }
+            };
+            var this_1 = this;
+            for (var _i = 0, events_1 = events; _i < events_1.length; _i++) {
+                var event_1 = events_1[_i];
+                _loop_1(event_1);
             }
         }
-    },
-    getStatus: function() {
-        for (var property in this.states) {
-            if (this.states[property] === true) {
-                return property;
-            }
-        }
-        return false;
-    },
-    setStatus: function(from, to) {
-        return function() {
-            if (this.states[from] === true) {
-                this.states[from] = false;
-                this.states[to] = true;
-                return true;
-            }
-            return false;
+        FSM.prototype.getStatus = function() {
+            return this.state;
         };
-    }
-};
+        return FSM;
+    }();
+    exports.FSM = FSM;
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+});
