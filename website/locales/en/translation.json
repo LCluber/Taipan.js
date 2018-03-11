@@ -13,7 +13,7 @@
   "section" : {
     "home" : {
       "h1" : "Taipan.js",
-      "description" : "An open source finite state machine written in Javascript."
+      "description" : "An open source finite state machine written in TypeScript."
     },
     "about" : {
       "h2" : "About",

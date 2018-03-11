@@ -11,7 +11,7 @@
   },
   "section" : {
     "home" : {
-      "description" : "Automate fini développé en Javascript."
+      "description" : "Automate fini développé en TypeScript."
     },
     "about" : {
       "h2" : "Présentation"

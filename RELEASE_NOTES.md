@@ -1,7 +1,11 @@
+Version 0.3.1 (March 11th 2018)
+------------------------------
+ * Added TypeScript Declaration File
+
 Version 0.3.0 (December 24th 2017)
 ------------------------------
  * changed state type to simplify the code
- * Library is written in typescript
+ * Library is written in TypeScript
 
 Version 0.2.1 (October 26th 2016)
 ------------------------------

@@ -5,6 +5,7 @@
         "sourceMap": true,
         "fast": "always",
         "noImplicitAny": true,
+        "noImplicitThis": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors":true

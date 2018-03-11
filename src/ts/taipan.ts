@@ -1,11 +1,11 @@
 
-interface IEvent {
+export interface IEvent {
   name : string;
   from : string;
   to   : string;
 }
 
-export class FSM {
+export class FSM { // FSM
 
   public state : string;
 

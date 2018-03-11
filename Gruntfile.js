@@ -17,9 +17,6 @@ module.exports = function(grunt){
   var docDir          = 'doc/';
   var zipDir          = 'zip/';
 
-  var src       = [ srcDir + projectNameLC + '.js'
-                  ];
-
   var banner    = '/** MIT License\n' +
     '* \n' +
     '* Copyright (c) 2015 Ludovic CLUBER \n' +
@@ -62,13 +59,13 @@ module.exports = function(grunt){
     clean: {
       lib:{
         src: [  distDir + '*',
-                docDir  + '*',
+                compiledSrcDir  + '*'
               ]
       },
       web:{
         src: [  zipDir + '*',
                 webDir + 'static/*',
-                webDir + 'sass/build/*',
+                webDir + 'sass/build/*'
         ]
       },
       public: {
@@ -119,12 +116,12 @@ module.exports = function(grunt){
         }]
       }
     },
-    jsdoc: {
-      dist : {
-        src: src,
-        config: 'config/jsdoc-conf.json'
-      }
-    },
+    // jsdoc: {
+    //   dist : {
+    //     src: src,
+    //     config: 'config/jsdoc-conf.json'
+    //   }
+    // },
     pug: {
       compile: {
         options: {
@@ -182,7 +179,7 @@ module.exports = function(grunt){
         outDir: compiledSrcDir,
         options: {
           rootDir: srcDir + 'ts/',
-          declaration: false
+          declaration: true
         },
         src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
       }
@@ -190,7 +187,8 @@ module.exports = function(grunt){
     rollup: {
       options: {
         format:'umd',
-        moduleName: projectName
+        moduleName: projectName,
+        banner: banner
       },
       bundle:{
         files: [ {
@@ -200,16 +198,16 @@ module.exports = function(grunt){
       }
     },
     uglify: {
-      lib: {
-        options: {
-          beautify: true,
-          banner: banner,
-          mangle: false,
-          compress:false,
-        },
-        src: distDir + projectNameLC + '.js',
-        dest: distDir + projectNameLC + '.js'
-      },
+      // lib: {
+      //   options: {
+      //     beautify: true,
+      //     banner: banner,
+      //     mangle: false,
+      //     compress:false,
+      //   },
+      //   src: distDir + projectNameLC + '.js',
+      //   dest: distDir + projectNameLC + '.js'
+      // },
       libmin: {
         options: {
           sourceMap: false,
@@ -279,6 +277,15 @@ module.exports = function(grunt){
       }
     },
     concat:{
+      declaration: {
+        options: {
+          separator: '',
+          stripBanners: false,
+          banner: banner
+        },
+        src: srcDir + '**/*.d.ts',
+        dest: distDir + projectNameLC + '.d.ts'
+      },
       webjs: {
         options: {
           separator: '',
@@ -329,13 +336,13 @@ module.exports = function(grunt){
         cwd: publicDir,
         src: ['**/*'],
         dest: webDir + 'static/public/'
-      },
-      doc: {
-        expand: true,
-        cwd: docDir,
-        src: ['**/*'],
-        dest: webDir + 'static/' + docDir
-      }
+      }//,
+      // doc: {
+      //   expand: true,
+      //   cwd: docDir,
+      //   src: ['**/*'],
+      //   dest: webDir + 'static/' + docDir
+      // }
     },
     compress: {
       main: {
@@ -429,7 +436,8 @@ module.exports = function(grunt){
                         'clean:lib',
                         'ts:lib',
                         'rollup',
-                        'uglify:libmin', 'uglify:lib'
+                        'uglify:libmin',
+                        'concat:declaration'
                         //'jsdoc'
                       ]
                     );
@@ -472,7 +480,7 @@ module.exports = function(grunt){
                         //static
                           'pug',
                           'htmlmin',
-                          'symlink:public', 'symlink:doc',
+                          'symlink:public',
                           'compress'
                       ]
                     );
