@@ -9,9 +9,8 @@ var fsm = new TAIPAN.FSM([
             { name: 'orangeOn', from: 'green', to: 'orange' },
             { name: 'redOn',    from: 'orange',  to: 'red' }
           ]);
-//console.log(fsm);
-console.log(fsm.getStatus());
-switchOn(lights[fsm.getStatus()]);
+
+switchOn(lights[fsm.state]);
 
 //turn requested light on if finite state machine authorizes it
 function changeLight(light){
@@ -20,7 +19,6 @@ function changeLight(light){
     transition(); //switch lights off
     switchOn(lights[light]); //switch requested light on
   }
-  console.log(fsm.getStatus());
 }
 
 //switch lights off

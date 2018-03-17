@@ -30,5 +30,4 @@ export interface IEvent {
 export declare class FSM {
     state: string;
     constructor(events: IEvent[]);
-    getStatus(): string;
 }

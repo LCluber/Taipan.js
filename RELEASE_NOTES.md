@@ -1,3 +1,7 @@
+Version 0.3.2 (March 11th 2018)
+------------------------------
+ * Added logs using Mouette.js
+
 Version 0.3.1 (March 11th 2018)
 ------------------------------
  * Added TypeScript Declaration File

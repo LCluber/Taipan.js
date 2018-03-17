@@ -18,7 +18,7 @@ section( id='source' class='container content-section text-center' )
       
       pre.
         //initialization
-        switchOn(lights[fsm.getStatus()]);
+        switchOn(lights[fsm.state]);
         
         //turn requested light on if finite state machine authorizes it
         function changeLight(light){
@@ -27,5 +27,4 @@ section( id='source' class='container content-section text-center' )
             transition(); //switch lights off
             switchOn(lights[light]); //switch requested light on
           }
-          console.log(fsm.getStatus());
         }

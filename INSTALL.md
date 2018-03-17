@@ -30,6 +30,7 @@ You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
 
 ### Install project dependencies
   - Run **npm install** in your project directory
+  - Run **bower install** from your project directory
 
 
 ### Workflow

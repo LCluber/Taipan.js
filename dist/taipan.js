@@ -24,10 +24,10 @@
 */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (factory((global.TAIPAN = {})));
-}(this, (function (exports) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../bower_components/Mouettejs/dist/mouette.js')) :
+    typeof define === 'function' && define.amd ? define(['exports', '../../bower_components/Mouettejs/dist/mouette.js'], factory) :
+    (factory((global.TAIPAN = {}),global.MOUETTE));
+}(this, (function (exports,MOUETTE) { 'use strict';
 
     var FSM = (function () {
         function FSM(events) {
@@ -36,10 +36,13 @@
             var _loop_1 = function (event_1) {
                 if (!this_1.hasOwnProperty(event_1.name)) {
                     this_1[event_1.name] = function () {
+                        MOUETTE.Logger.info('- Event ' + event_1.name + ' triggered');
                         if (_this.state == event_1.from) {
                             _this.state = event_1.to;
+                            MOUETTE.Logger.info('from ' + event_1.from + ' to ' + _this.state);
                             return true;
                         }
+                        MOUETTE.Logger.warn('Cannot transition from ' + _this.state + ' to ' + event_1.to);
                         return false;
                     };
                 }
@@ -50,9 +53,6 @@
                 _loop_1(event_1);
             }
         }
-        FSM.prototype.getStatus = function () {
-            return this.state;
-        };
         return FSM;
     }());
 
