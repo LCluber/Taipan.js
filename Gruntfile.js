@@ -367,6 +367,15 @@ module.exports = function(grunt){
         dest: publicDir + 'css/style.min.css'
       }
     },
+    copy: {
+      mouette:{
+        expand: true,
+        cwd: bowerDir + 'mouettejs/dist/',
+        src: ['*.htm'],
+        dest: webDir + 'views/',
+        filter: 'isFile'
+      }
+    },
     symlink: {
       options: {
         overwrite: false,
@@ -473,6 +482,7 @@ module.exports = function(grunt){
   });
 
   grunt.loadNpmTasks( 'grunt-bower-concat' );
+  grunt.loadNpmTasks( 'grunt-contrib-copy' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
   grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
@@ -541,7 +551,7 @@ module.exports = function(grunt){
                           'sass',
                           'cssmin',
                           'symlink:fonts', 'symlink:fontAwesome',
-                          'symlink:mouette',
+                          'copy:mouette',
                           'concat:webcss',
                         //static
                           'pug',
