@@ -66,7 +66,8 @@ module.exports = function(grunt){
       web:{
         src: [  zipDir + '*',
                 webDir + 'static/*',
-                webDir + 'sass/build/*'
+                webDir + 'sass/build/*',
+                webDir    + 'js/build/*'
         ]
       },
       public: {
@@ -197,7 +198,7 @@ module.exports = function(grunt){
           rootDir: srcDir + 'ts/',
           declaration: true
         },
-        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
+        src: [ srcDir + 'ts/**/*.ts', '!node_modules/**/*.ts' ]
       }
     },
     rollup: {
@@ -380,13 +381,6 @@ module.exports = function(grunt){
       options: {
         overwrite: false,
         force: false
-      },
-      mouette:{
-        expand: true,
-        cwd: bowerDir + 'mouettejs/dist/',
-        src: ['*.htm'],
-        dest: webDir + 'views/',
-        filter: 'isFile'
       },
       fonts:{
         expand: true,
