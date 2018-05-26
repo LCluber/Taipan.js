@@ -1,7 +1,12 @@
+import 'bootstrap';
+import * as TAIPAN from '../../dist/taipan';
+import * as WEE from '../../node_modules/Weejs/dist/wee';
+import './grayscale';
+
 var lights = {
-  green  : findById("green"),
-  orange : findById("yellow"),
-  red    : findById("red")
+  green  : WEE.Dom.findById("green"),
+  orange : WEE.Dom.findById("yellow"),
+  red    : WEE.Dom.findById("red")
 };
 
 var fsm = new TAIPAN.FSM([
@@ -40,8 +45,4 @@ function switchOff(light){
 function switchOn(light){
   light.style.opacity = 1.0; //For real browsers;
   light.style.filter = "alpha(opacity=100)"; //For IE;
-}
-
-function findById( id ) {
-  return document.getElementById(id);
 }

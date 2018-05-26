@@ -1,4 +1,4 @@
-import * as MOUETTE from '../../bower_components/Mouettejs/dist/mouette';
+import * as MOUETTE from '../bower_components/Mouettejs/dist/mouette';
 var FSM = (function () {
     function FSM(events) {
         var _this = this;

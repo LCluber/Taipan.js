@@ -24,8 +24,8 @@
 */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../bower_components/Mouettejs/dist/mouette.js')) :
-    typeof define === 'function' && define.amd ? define(['exports', '../../bower_components/Mouettejs/dist/mouette.js'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../bower_components/Mouettejs/dist/mouette.js')) :
+    typeof define === 'function' && define.amd ? define(['exports', '../bower_components/Mouettejs/dist/mouette.js'], factory) :
     (factory((global.TAIPAN = {}),global.MOUETTE));
 }(this, (function (exports,MOUETTE) { 'use strict';
 
