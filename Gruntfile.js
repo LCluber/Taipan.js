@@ -164,7 +164,7 @@ module.exports = function(grunt){
     },
     webpack: {
       options: {
-        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        stats: !process.env.NODE_ENV || process.env.NODE_ENV === /*'production'*/'development'
       },
       prod: webpackConfig
       //dev: Object.assign({ watch: true }, webpackConfig)
@@ -234,42 +234,43 @@ module.exports = function(grunt){
       //     dest : webDir + 'js/build/bower.min.js'
       //   }]
       // },
-      // web: {
-      //   options: {
-      //     sourceMap: false,
-      //     sourceMapName: srcDir + 'sourcemap.map',
-      //     banner: '',
-      //     mangle: {
-      //       reserved: ['jQuery']
-      //     },
-      //     compress: {
-      //       sequences: true,
-      //       properties: true,
-      //       dead_code: true,
-      //       unsafe: false,
-      //       conditionals:true,
-      //       comparisons:true,
-      //       booleans:true,
-      //       loops:true,
-      //       unused: true,
-      //       hoist_funs:true,
-      //       if_return:true,
-      //       join_vars:true,
-      //       cascade:true,
-      //       warnings: true,
-      //       drop_console: false,
-      //       keep_fargs: false,
-      //       keep_fnames: false
-      //     }
-      //   },
-      //   files: [{
-      //     src  : [
-      //       nodeDir + 'jquery-easing/jquery.easing.1.3.js',
-      //       webDir + 'js/*.js'
-      //     ],
-      //     dest : publicDir + 'js/main.min.js'
-      //   }]
-      // }
+      web: {
+        options: {
+          sourceMap: false,
+          sourceMapName: srcDir + 'sourcemap.map',
+          banner: '',
+          mangle: {
+            reserved: ['jQuery']
+          },
+          compress: {
+            sequences: true,
+            properties: true,
+            dead_code: true,
+            unsafe: false,
+            conditionals:true,
+            comparisons:true,
+            booleans:true,
+            loops:true,
+            unused: true,
+            hoist_funs:true,
+            if_return:true,
+            join_vars:true,
+            cascade:true,
+            warnings: true,
+            drop_console: false,
+            keep_fargs: false,
+            keep_fnames: false
+          }
+        },
+        files: [{
+          src  : [
+            //nodeDir + 'jquery-easing/jquery.easing.1.3.js',
+            //webDir + 'js/grayscale.js',
+            webDir + 'js/example.js',
+          ],
+          dest : publicDir + 'js/main.min.js'
+        }]
+      }
     },
     concat:{
       declaration: {
@@ -291,7 +292,8 @@ module.exports = function(grunt){
                 //nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
                 //webDir    + 'js/build/bower.min.js',
                 //distDir   + projectNameLC + '.min.js',
-                publicDir + 'js/bundle.js'
+                webDir + 'js/build/bundle.js',
+                publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
       },
@@ -423,7 +425,7 @@ module.exports = function(grunt){
                           //'bower_concat',
                           'webpack:prod',
                           //'uglify:bower',
-                          //'uglify:web',
+                          'uglify:web',
                           'concat:webjs',
                         //css
                           'sass',
