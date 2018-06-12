@@ -1,4 +1,5 @@
 const path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   mode: /*'production',*/'development',
@@ -8,8 +9,27 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '../website/js/build/')
-  }//,
+  },
   // externals: {
   //   jquery: 'jQuery'
-  // }
+  // },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
+  ],
+  module: {
+    noParse: [
+      // /[\/\\]node_modules[\/\\]angular[\/\\]angular\.js$/
+      /\.\.\/\.\.\/node_modules[\/\\]Weejs[\/\\]dist[\/\\]wee\.js$/
+    ],
+    rules: [
+      {
+        test: /\.\.\/\.\.\/node_modules[\/\\]Weejs[\/\\]dist[\/\\]wee\.js$/,
+        loader: "imports-loader?define=>false"
+      }
+    ]
+  }
+
 };
