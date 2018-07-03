@@ -23,41 +23,31 @@
 * http://taipanjs.lcluber.com
 */
 
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../bower_components/Mouettejs/dist/mouette.js')) :
-    typeof define === 'function' && define.amd ? define(['exports', '../bower_components/Mouettejs/dist/mouette.js'], factory) :
-    (factory((global.TAIPAN = {}),global.MOUETTE));
-}(this, (function (exports,MOUETTE) { 'use strict';
+var TAIPAN = (function (mouette_js) {
+    'use strict';
 
-    var FSM = (function () {
-        function FSM(events) {
-            var _this = this;
+    class Taipan {
+        constructor(events) {
             this.state = events[0].from;
-            var _loop_1 = function (event_1) {
-                if (!this_1.hasOwnProperty(event_1.name)) {
-                    this_1[event_1.name] = function () {
-                        MOUETTE.Logger.info('- Event ' + event_1.name + ' triggered');
-                        if (_this.state == event_1.from) {
-                            _this.state = event_1.to;
-                            MOUETTE.Logger.info('from ' + event_1.from + ' to ' + _this.state);
+            for (let event of events) {
+                if (!this.hasOwnProperty(event.name)) {
+                    this[event.name] = () => {
+                        mouette_js.Logger.info('- Event ' + event.name + ' triggered');
+                        if (this.state == event.from) {
+                            this.state = event.to;
+                            mouette_js.Logger.info('from ' + event.from + ' to ' + this.state);
                             return true;
                         }
-                        MOUETTE.Logger.warn('Cannot transition from ' + _this.state + ' to ' + event_1.to);
+                        mouette_js.Logger.warn('Cannot transition from ' + this.state + ' to ' + event.to);
                         return false;
                     };
                 }
-            };
-            var this_1 = this;
-            for (var _i = 0, events_1 = events; _i < events_1.length; _i++) {
-                var event_1 = events_1[_i];
-                _loop_1(event_1);
             }
         }
-        return FSM;
-    }());
+    }
 
-    exports.FSM = FSM;
+    return Taipan;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
+}(mouette_js));
 
-})));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjpudWxsLCJzb3VyY2VzIjpbIi9Vc2Vycy9sY2x1YmVyL1Byb2plY3RzL2dpdGh1Yi9UYWlwYW4uanMvYnVpbGQvdGFpcGFuLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IExvZ2dlciB9IGZyb20gJy4uL2Jvd2VyX2NvbXBvbmVudHMvTW91ZXR0ZWpzL2Rpc3QvbW91ZXR0ZSc7XG5leHBvcnQgZGVmYXVsdCBjbGFzcyBUYWlwYW4ge1xuICAgIGNvbnN0cnVjdG9yKGV2ZW50cykge1xuICAgICAgICB0aGlzLnN0YXRlID0gZXZlbnRzWzBdLmZyb207XG4gICAgICAgIGZvciAobGV0IGV2ZW50IG9mIGV2ZW50cykge1xuICAgICAgICAgICAgaWYgKCF0aGlzLmhhc093blByb3BlcnR5KGV2ZW50Lm5hbWUpKSB7XG4gICAgICAgICAgICAgICAgdGhpc1tldmVudC5uYW1lXSA9ICgpID0+IHtcbiAgICAgICAgICAgICAgICAgICAgTG9nZ2VyLmluZm8oJy0gRXZlbnQgJyArIGV2ZW50Lm5hbWUgKyAnIHRyaWdnZXJlZCcpO1xuICAgICAgICAgICAgICAgICAgICBpZiAodGhpcy5zdGF0ZSA9PSBldmVudC5mcm9tKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICB0aGlzLnN0YXRlID0gZXZlbnQudG87XG4gICAgICAgICAgICAgICAgICAgICAgICBMb2dnZXIuaW5mbygnZnJvbSAnICsgZXZlbnQuZnJvbSArICcgdG8gJyArIHRoaXMuc3RhdGUpO1xuICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHRydWU7XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgTG9nZ2VyLndhcm4oJ0Nhbm5vdCB0cmFuc2l0aW9uIGZyb20gJyArIHRoaXMuc3RhdGUgKyAnIHRvICcgKyBldmVudC50byk7XG4gICAgICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTtcbiAgICAgICAgICAgICAgICB9O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuO1xuLy8jIHNvdXJjZU1hcHBpbmdVUkw9dGFpcGFuLmpzLm1hcCJdLCJuYW1lcyI6WyJMb2dnZXIiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFDZSxNQUFNLE1BQU0sQ0FBQztJQUM1QixJQUFJLFdBQVcsQ0FBQyxNQUFNLEVBQUU7SUFDeEIsUUFBUSxJQUFJLENBQUMsS0FBSyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUM7SUFDcEMsUUFBUSxLQUFLLElBQUksS0FBSyxJQUFJLE1BQU0sRUFBRTtJQUNsQyxZQUFZLElBQUksQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsRUFBRTtJQUNsRCxnQkFBZ0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxNQUFNO0lBQ3pDLG9CQUFvQkEsaUJBQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxHQUFHLEtBQUssQ0FBQyxJQUFJLEdBQUcsWUFBWSxDQUFDLENBQUM7SUFDeEUsb0JBQW9CLElBQUksSUFBSSxDQUFDLEtBQUssSUFBSSxLQUFLLENBQUMsSUFBSSxFQUFFO0lBQ2xELHdCQUF3QixJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQyxFQUFFLENBQUM7SUFDOUMsd0JBQXdCQSxpQkFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDLElBQUksR0FBRyxNQUFNLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ2hGLHdCQUF3QixPQUFPLElBQUksQ0FBQztJQUNwQyxxQkFBcUI7SUFDckIsb0JBQW9CQSxpQkFBTSxDQUFDLElBQUksQ0FBQyx5QkFBeUIsR0FBRyxJQUFJLENBQUMsS0FBSyxHQUFHLE1BQU0sR0FBRyxLQUFLLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDNUYsb0JBQW9CLE9BQU8sS0FBSyxDQUFDO0lBQ2pDLGlCQUFpQixDQUFDO0lBQ2xCLGFBQWE7SUFDYixTQUFTO0lBQ1QsS0FBSztJQUNMLENBQUM7Ozs7Ozs7OyJ9

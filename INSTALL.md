@@ -28,6 +28,10 @@ You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
   - Run **npm install -g grunt-cli**
 
 
+### Install typescript :
+  - Run **npm install -g typescript**
+
+
 ### Install project dependencies
   - Run **npm install** in your project directory
   - Run **bower install** from your project directory
@@ -48,8 +52,8 @@ You just cloned Taipan.js : git clone https://github.com/LCluber/Taipan.js.git
       - Linux / OSX : Run **DEBUG=Taipanjs:* npm start**
     - Go to **http://localhost:3004/** to test the app.
     - Keep in mind running **grunt** once will do all this automatically.
-    
-    
-  - Set node environment if needed : 
+
+
+  - Set node environment if needed :
     - Run **export NODE_ENV=development**
     - Or **export NODE_ENV=production**

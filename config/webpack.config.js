@@ -20,16 +20,7 @@ module.exports = {
     })
   ],
   module: {
-    noParse: [
-      // /[\/\\]node_modules[\/\\]angular[\/\\]angular\.js$/
-      /\.\.\/\.\.\/node_modules[\/\\]Weejs[\/\\]dist[\/\\]wee\.js$/
-    ],
-    rules: [
-      {
-        test: /\.\.\/\.\.\/node_modules[\/\\]Weejs[\/\\]dist[\/\\]wee\.js$/,
-        loader: "imports-loader?define=>false"
-      }
-    ]
+    
   }
 
 };

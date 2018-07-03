@@ -146,16 +146,17 @@ module.exports = function(grunt){
       }
     },
     rollup: {
-      options: {
-        format:'umd',
-        moduleName: projectName,
-        external: [
-          // 'type6',
-          path.resolve( './bower_components/Mouettejs/dist/mouette.js' ),
-        ],
-        banner: banner
-      },
-      bundle:{
+      iife:{
+        options: {
+          format:'es',
+          moduleName: projectName,
+          external: [
+            // 'type6',
+            path.resolve( './bower_components/Mouettejs/dist/mouette.js' ),
+          ],
+          banner: banner,
+          sourceMap: 'inline'
+        },
         files: [ {
           src : buildDir + projectNameLC + '.js',
           dest : distDir + projectNameLC + '.js'
@@ -279,7 +280,7 @@ module.exports = function(grunt){
           stripBanners: false,
           banner: banner
         },
-        src: srcDir + '**/*.d.ts',
+        src: buildDir + '*.d.ts',
         dest: distDir + projectNameLC + '.d.ts'
       },
       webjs: {
@@ -412,7 +413,7 @@ module.exports = function(grunt){
                         'clean:lib',
                         'ts:lib',
                         'rollup',
-                        'uglify:libmin',
+                        //'uglify:libmin',
                         'concat:declaration'
                       ]
                     );

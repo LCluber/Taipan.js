@@ -3,7 +3,7 @@ export interface IEvent {
     from: string;
     to: string;
 }
-export declare class FSM {
+export default class Taipan {
     state: string;
     constructor(events: IEvent[]);
 }
