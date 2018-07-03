@@ -63,6 +63,10 @@ module.exports = function(grunt){
                 compiledSrcDir  + '*'
               ]
       },
+      doc:{
+        src: [  docDir + '*'
+              ]
+      },
       web:{
         src: [  zipDir + '*',
                 webDir + 'static/*',
@@ -77,6 +81,16 @@ module.exports = function(grunt){
         ]
       }
     },
+    typedoc: {
+  		build: {
+  			options: {
+  				out: docDir,
+  				target: 'es6',
+          name: projectName + '.js - Documentation'
+  			},
+  			src: [srcDir + 'ts/*.ts']
+  		}
+  	},
     jshint: {
       options: {
         jshintrc: 'config/.jshintrc'
@@ -118,12 +132,6 @@ module.exports = function(grunt){
         }]
       }
     },
-    // jsdoc: {
-    //   dist : {
-    //     src: src,
-    //     config: 'config/jsdoc-conf.json'
-    //   }
-    // },
     pug: {
       compile: {
         options: {
@@ -185,7 +193,7 @@ module.exports = function(grunt){
       lib: {
         files: [{
           expand: true,
-          cwd: srcDir, 
+          cwd: srcDir,
           src: [ srcDir + '**/*.ts' ]
         }]
       }
@@ -213,8 +221,8 @@ module.exports = function(grunt){
       },
       bundle:{
         files: [ {
-          src : compiledSrcDir + projectNameLC + '.js', 
-          dest : distDir + projectNameLC + '.js' 
+          src : compiledSrcDir + projectNameLC + '.js',
+          dest : distDir + projectNameLC + '.js'
         } ]
       }
     },
@@ -446,7 +454,7 @@ module.exports = function(grunt){
     watch: {
       lib: {
         files: srcDir + 'ts/**/*.ts',
-        tasks: ['dist'],  
+        tasks: ['dist'],
       },
       webpug:{
         files: webDir + 'views/**/*.pug'
@@ -489,13 +497,13 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-symlink' );
   grunt.loadNpmTasks( 'grunt-contrib-compress' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks( 'grunt-jsdoc' );
   grunt.loadNpmTasks( 'grunt-concurrent' );
   grunt.loadNpmTasks( 'grunt-nodemon' );
   grunt.loadNpmTasks( 'grunt-open' );
   grunt.loadNpmTasks( 'grunt-tslint' );
   grunt.loadNpmTasks( 'grunt-ts' );
   grunt.loadNpmTasks( 'grunt-rollup' );
+  grunt.loadNpmTasks( 'grunt-typedoc' );
 
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
@@ -505,13 +513,14 @@ module.exports = function(grunt){
                         'rollup',
                         'uglify:libmin',
                         'concat:declaration'
-                        //'jsdoc'
                       ]
                     );
 
   grunt.registerTask( 'doc',
-                      'build jsdoc in the doc/ folder',
-                      [ 'jsdoc' ]
+                      'Compile lib documentation',
+                      [ 'clean:doc',
+                        'typedoc'
+                      ]
                     );
 
   // grunt.registerTask( 'static',
@@ -521,7 +530,7 @@ module.exports = function(grunt){
   //                       'symlink:fonts', 'symlink:fontAwesome', 'symlink:public', 'symlink:doc'
   //                     ]
   //                   );
-                    
+
   // grunt.registerTask( 'zip',
   //                     'create the zip package',
   //                     ['compress']
@@ -540,7 +549,7 @@ module.exports = function(grunt){
                           'bower_concat',
                           'uglify:bower',
                           'uglify:web',
-                          'concat:webjs', 
+                          'concat:webjs',
                         //css
                           'sass',
                           'cssmin',
@@ -562,6 +571,8 @@ module.exports = function(grunt){
                         grunt.task.run('lib');
                         //build site
                         grunt.task.run('website');
+                        //build documentation
+                        grunt.task.run('doc');
                       }
                     );
 

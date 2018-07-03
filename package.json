@@ -1,6 +1,6 @@
 {
   "name": "Taipanjs",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "javascript library",
   "keywords": [
     "finite state machine"
@@ -53,16 +53,17 @@
     "grunt-contrib-symlink": "1.0.0",
     "grunt-contrib-uglify": "3.0.1",
     "grunt-contrib-watch": "1.0.0",
-    "grunt-jsdoc": "2.1.0",
     "grunt-nodemon": "0.4.2",
     "grunt-open": "0.2.3",
     "grunt-rollup": "4.0.0",
     "grunt-ts": "5.5.1",
     "grunt-tslint": "5.0.1",
+    "grunt-typedoc": "0.2.4",
     "jquery": "3.2.1",
     "jquery-easing": "0.0.1",
     "time-grunt": "1.4.0",
     "tslint": "5.8.0",
-    "typescript": "2.6.1"
+    "typedoc": "0.11.1",
+    "typescript": "2.9.2"
   }
 }
