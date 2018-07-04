@@ -1,4 +1,4 @@
-Version 0.4.0 (July 3rd 2018)
+Version 0.3.3 (July 3rd 2018)
 ------------------------------
  * Documentation automatically generated in /doc folder
  * Typedoc and grunt-typedoc added in devDependencies
