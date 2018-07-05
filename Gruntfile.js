@@ -16,7 +16,6 @@ module.exports = function(grunt){
   var nodeDir         = 'node_modules/';
   var bowerDir        = 'bower_components/';
   var docDir          = 'doc/';
-  var zipDir          = 'zip/';
 
   var banner    = '/** MIT License\n' +
     '* \n' +
@@ -68,8 +67,7 @@ module.exports = function(grunt){
               ]
       },
       web:{
-        src: [  zipDir + '*',
-                webDir + 'static/*',
+        src: [  webDir + 'static/*',
                 webDir + 'sass/build/*',
                 webDir    + 'js/build/*'
         ]
@@ -383,12 +381,6 @@ module.exports = function(grunt){
         src: ['*.htm'],
         dest: webDir + 'views/',
         filter: 'isFile'
-      }
-    },
-    symlink: {
-      options: {
-        overwrite: false,
-        force: false
       },
       fonts:{
         expand: true,
@@ -403,36 +395,6 @@ module.exports = function(grunt){
         src: ['fonts/**/*'],
         dest: publicDir,
         filter: 'isFile'
-      },
-      public: {
-        expand: true,
-        cwd: publicDir,
-        src: ['**/*'],
-        dest: webDir + 'static/public/'
-      }//,
-      // doc: {
-      //   expand: true,
-      //   cwd: docDir,
-      //   src: ['**/*'],
-      //   dest: webDir + 'static/' + docDir
-      // }
-    },
-    compress: {
-      main: {
-        options: {
-          archive: zipDir + projectNameLC + 'js.zip'
-        },
-        files: [
-          {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
-          {expand: true, cwd: publicDir, src: '**', dest: '/public'},
-          {src: [ distDir + '**',
-                  docDir + '**',
-                  'LICENCE.md',
-                  'README.md',
-                  'RELEASE_NOTES.md'
-                ],
-                dest: '/', filter: 'isFile'}
-        ]
       }
     },
     nodemon: {
@@ -491,11 +453,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-csslint' );
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
-  grunt.loadNpmTasks( 'grunt-contrib-pug' );
   grunt.loadNpmTasks( 'grunt-contrib-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
-  grunt.loadNpmTasks( 'grunt-contrib-symlink' );
-  grunt.loadNpmTasks( 'grunt-contrib-compress' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   grunt.loadNpmTasks( 'grunt-concurrent' );
   grunt.loadNpmTasks( 'grunt-nodemon' );
@@ -553,14 +512,10 @@ module.exports = function(grunt){
                         //css
                           'sass',
                           'cssmin',
-                          'symlink:fonts', 'symlink:fontAwesome',
+                          'copy:fonts',
+                          'copy:fontAwesome',
                           'copy:mouette',
-                          'concat:webcss',
-                        //static
-                          'pug',
-                          'htmlmin',
-                          'symlink:public',
-                          'compress'
+                          'concat:webcss'
                       ]
                     );
 
