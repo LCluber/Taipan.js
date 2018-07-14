@@ -1,3 +1,9 @@
+Version 0.3.4 (July 10th 2018)
+-----------------------------
+ * Library exported as ES6 and IIFE modules instead of UMD.
+ * TAIPAN namespace becomes Taipan
+ * Improved modules resolution with the use of absolute paths
+
 Version 0.3.3 (July 3rd 2018)
 ------------------------------
  * Documentation automatically generated in /doc folder

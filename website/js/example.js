@@ -4,7 +4,7 @@ var lights = {
   red    : findById("red")
 };
 
-var fsm = new TAIPAN.FSM([
+var fsm = new Taipan.FSM([
             { name: 'greenOn',  from: 'red',  to: 'green' },
             { name: 'orangeOn', from: 'green', to: 'orange' },
             { name: 'redOn',    from: 'orange',  to: 'red' }

@@ -23,41 +23,26 @@
 * http://taipanjs.lcluber.com
 */
 
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../bower_components/Mouettejs/dist/mouette.js')) :
-    typeof define === 'function' && define.amd ? define(['exports', '../../bower_components/Mouettejs/dist/mouette.js'], factory) :
-    (factory((global.TAIPAN = {}),global.MOUETTE));
-}(this, (function (exports,MOUETTE) { 'use strict';
+import { Logger } from 'mouettejs';
 
-    var FSM = (function () {
-        function FSM(events) {
-            var _this = this;
-            this.state = events[0].from;
-            var _loop_1 = function (event_1) {
-                if (!this_1.hasOwnProperty(event_1.name)) {
-                    this_1[event_1.name] = function () {
-                        MOUETTE.Logger.info('- Event ' + event_1.name + ' triggered');
-                        if (_this.state == event_1.from) {
-                            _this.state = event_1.to;
-                            MOUETTE.Logger.info('from ' + event_1.from + ' to ' + _this.state);
-                            return true;
-                        }
-                        MOUETTE.Logger.warn('Cannot transition from ' + _this.state + ' to ' + event_1.to);
-                        return false;
-                    };
-                }
-            };
-            var this_1 = this;
-            for (var _i = 0, events_1 = events; _i < events_1.length; _i++) {
-                var event_1 = events_1[_i];
-                _loop_1(event_1);
+class FSM {
+    constructor(events) {
+        this.state = events[0].from;
+        for (let event of events) {
+            if (!this.hasOwnProperty(event.name)) {
+                this[event.name] = () => {
+                    Logger.info('- Event ' + event.name + ' triggered');
+                    if (this.state == event.from) {
+                        this.state = event.to;
+                        Logger.info('from ' + event.from + ' to ' + this.state);
+                        return true;
+                    }
+                    Logger.warn('Cannot transition from ' + this.state + ' to ' + event.to);
+                    return false;
+                };
             }
         }
-        return FSM;
-    }());
+    }
+}
 
-    exports.FSM = FSM;
-
-    Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+export { FSM };
