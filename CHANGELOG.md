@@ -1,3 +1,4 @@
+
 Version 0.3.4 (July 10th 2018)
 -----------------------------
  * Library exported as ES6 and IIFE modules instead of UMD.
