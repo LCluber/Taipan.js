@@ -4,21 +4,28 @@
 
   It is an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition; this is called a transition. A particular FSM is defined by a list of its states, its initial state, and the triggering condition for each transition.
 
-## Code Example
-
- [See a basic example on the dedicated website](http://taipanjs.lcluber.com/#source).
-
 ## Motivation
 
 The main purpose of this library is to provide a simple way to handle sequential logics.
 
 ## Installation
 
-To use **Taipan.js** download it **[here](http://taipanjs.lcluber.com/#download)** and learn how to use it **[there](http://taipanjs.lcluber.com/#example)**.
+```bash
+$ npm install @lcluber/taipanjs
+```
+Or download it **[here](http://taipanjs.lcluber.com/#download)**.
+
+## Demo
+
+See a basic example **[here](http://taipanjs.lcluber.com/#example)**.
+
+## Usage
+
+Learn how to use it **[here](http://taipanjs.lcluber.com/#source)**.
 
 ## API Reference
 
-[See the documentation on the dedicated website](http://taipanjs.lcluber.com/doc/).
+Read the documentation **[here](http://taipanjs.lcluber.com/doc/)**.
 
 ## Tests
 

@@ -1,3 +1,7 @@
+Version 0.3.5 (October 07th 2018)
+-----------------------------
+ * Taipan.js published on NPM at @lcluber/taipanjs.
+ * Updated README.md with NPM installation procedure.
 
 Version 0.3.4 (July 10th 2018)
 -----------------------------

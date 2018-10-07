@@ -1,4 +1,4 @@
-import { Logger } from 'mouettejs';
+import { Logger } from '@lcluber/mouettejs';
 // import * as Mouette from '../../node_modules/Mouettejs/dist/mouette';
 
 export interface IEvent {
