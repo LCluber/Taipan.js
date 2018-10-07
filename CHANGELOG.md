@@ -1,3 +1,7 @@
+Version 0.3.6 (October 08th 2018)
+-----------------------------
+ * Fix Mouette.js import in ES6 library.
+
 Version 0.3.5 (October 07th 2018)
 -----------------------------
  * Taipan.js published on NPM at @lcluber/taipanjs.

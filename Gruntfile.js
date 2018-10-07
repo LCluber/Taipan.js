@@ -182,7 +182,7 @@ module.exports = function(grunt){
             })
           ],
           external: [
-            'mouettejs'
+            '@lcluber/mouettejs'
           ]
         },
         files: [ {
