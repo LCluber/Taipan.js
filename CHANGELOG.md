@@ -1,3 +1,8 @@
+
+Version 0.3.7 (March 15th 2019)
+-----------------------------
+ * Improved typings
+
 Version 0.3.6 (October 08th 2018)
 -----------------------------
  * Fix Mouette.js import in ES6 library.

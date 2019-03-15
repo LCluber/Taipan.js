@@ -1,5 +1,8 @@
 import { Logger } from '@lcluber/mouettejs';
-// import * as Mouette from '../../node_modules/Mouettejs/dist/mouette';
+
+export interface FSM {
+  [key: string]: Function|string
+}
 
 export interface IEvent {
   name : string;

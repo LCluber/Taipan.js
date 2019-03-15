@@ -22,6 +22,9 @@
 *
 * http://taipanjs.lcluber.com
 */
+export interface FSM {
+    [key: string]: Function | string;
+}
 export interface IEvent {
     name: string;
     from: string;
