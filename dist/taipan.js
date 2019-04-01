@@ -32,7 +32,7 @@ class FSM {
             if (!this.hasOwnProperty(event.name)) {
                 this[event.name] = () => {
                     Logger.info('- Event ' + event.name + ' triggered');
-                    if (this.state == event.from) {
+                    if (this.state === event.from) {
                         this.state = event.to;
                         Logger.info('from ' + event.from + ' to ' + this.state);
                         return true;

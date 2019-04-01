@@ -1,7 +1,8 @@
 import { Logger } from '@lcluber/mouettejs';
 
 export interface FSM {
-  [key: string]: Function|string
+  state: string;
+  [key: string]: any;
 }
 
 export interface IEvent {
@@ -20,7 +21,7 @@ export class FSM { // FSM
       if (!this.hasOwnProperty(event.name)) {
         this[event.name] = (): boolean => { //create event method
           Logger.info('- Event ' + event.name + ' triggered');
-          if(this.state == event.from){ //if the state can be modified
+          if(this.state === event.from){ //if the state can be modified
             this.state = event.to; // set the state to the event
             Logger.info('from ' + event.from + ' to ' + this.state);
             return true; //GG
