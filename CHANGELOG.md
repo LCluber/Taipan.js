@@ -1,3 +1,7 @@
+Version 0.3.9 (June 23th 2019)
+-----------------------------
+ * Updated Mouette logger for log groups management.
+
 Version 0.3.8 (April 01st 2019)
 -----------------------------
  * Improved typings

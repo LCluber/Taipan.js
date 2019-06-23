@@ -28,16 +28,18 @@ import { Logger } from '@lcluber/mouettejs';
 class FSM {
     constructor(events) {
         this.state = events[0].from;
+        this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
+        Logger.setLevel('error');
         for (let event of events) {
             if (!this.hasOwnProperty(event.name)) {
                 this[event.name] = () => {
-                    Logger.info('- Event ' + event.name + ' triggered');
+                    this.log.info('- Event ' + event.name + ' triggered');
                     if (this.state === event.from) {
                         this.state = event.to;
-                        Logger.info('from ' + event.from + ' to ' + this.state);
+                        this.log.info('from ' + event.from + ' to ' + this.state);
                         return true;
                     }
-                    Logger.warn('Cannot transition from ' + this.state + ' to ' + event.to);
+                    this.log.warn('Cannot transition from ' + this.state + ' to ' + event.to);
                     return false;
                 };
             }

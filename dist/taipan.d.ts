@@ -33,5 +33,6 @@ export interface IEvent {
 }
 export declare class FSM {
     state: string;
+    private log;
     constructor(events: IEvent[]);
 }

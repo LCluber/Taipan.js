@@ -63,6 +63,16 @@ var Taipan = (function (exports) {
         off: { id: 99, name: 'off', color: null }
     };
 
+    function addZero(value) {
+        return value < 10 ? '0' + value : value;
+    }
+    function formatDate() {
+        var now = new Date();
+        var date = [addZero(now.getMonth() + 1), addZero(now.getDate()), now.getFullYear().toString().substr(-2)];
+        var time = [addZero(now.getHours()), addZero(now.getMinutes()), addZero(now.getSeconds())];
+        return date.join("/") + " " + time.join(":");
+    }
+
     var Message = function () {
         function Message(level, content) {
             _classCallCheck(this, Message);
@@ -71,16 +81,69 @@ var Taipan = (function (exports) {
             this.name = level.name;
             this.color = level.color;
             this.content = content;
+            this.date = formatDate();
         }
 
         _createClass(Message, [{
             key: 'display',
-            value: function display() {
-                console[this.name]('%c' + this.content, 'color:' + this.color + ';');
+            value: function display(groupName) {
+                console[this.name]('%c[' + groupName + '] ' + this.date + ' : ', 'color:' + this.color + ';', this.content);
             }
         }]);
 
         return Message;
+    }();
+
+    var Group = function () {
+        function Group(name) {
+            _classCallCheck(this, Group);
+
+            this.messages = [];
+            this.name = name;
+            this.messages = [];
+            this._level = LEVELS.info;
+        }
+
+        _createClass(Group, [{
+            key: 'info',
+            value: function info(message) {
+                this.log(LEVELS.info, message);
+            }
+        }, {
+            key: 'trace',
+            value: function trace(message) {
+                this.log(LEVELS.trace, message);
+            }
+        }, {
+            key: 'warn',
+            value: function warn(message) {
+                this.log(LEVELS.warn, message);
+            }
+        }, {
+            key: 'error',
+            value: function error(message) {
+                this.log(LEVELS.error, message);
+            }
+        }, {
+            key: 'log',
+            value: function log(level, messageContent) {
+                var message = new Message(level, messageContent);
+                this.messages.push(message);
+                if (this._level.id <= message.id) {
+                    message.display(this.name);
+                }
+            }
+        }, {
+            key: 'level',
+            set: function set(name) {
+                this._level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : this._level;
+            },
+            get: function get() {
+                return this._level.name;
+            }
+        }]);
+
+        return Group;
     }();
 
     var Logger = function () {
@@ -88,67 +151,103 @@ var Taipan = (function (exports) {
             _classCallCheck(this, Logger);
         }
 
-        _createClass(Logger, [{
-            key: 'level',
-            set: function set(name) {
-                Logger._level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : LEVELS.info;
-            },
-            get: function get() {
-                return Logger._level.name;
-            }
-        }], [{
-            key: 'info',
-            value: function info(message) {
-                Logger.log(LEVELS.info, message);
-            }
-        }, {
-            key: 'trace',
-            value: function trace(message) {
-                Logger.log(LEVELS.trace, message);
-            }
-        }, {
-            key: 'warn',
-            value: function warn(message) {
-                Logger.log(LEVELS.warn, message);
-            }
-        }, {
-            key: 'error',
-            value: function error(message) {
-                Logger.log(LEVELS.error, message);
-            }
-        }, {
-            key: 'log',
-            value: function log(level, messageContent) {
-                var message = new Message(level, messageContent);
-                this.messages.push(message);
-                this.nbMessages++;
-                if (this._level.id <= message.id) {
-                    message.display();
+        _createClass(Logger, null, [{
+            key: 'setLevel',
+            value: function setLevel(name) {
+                Logger.level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : Logger.level;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = Logger.groups[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var group = _step.value;
+
+                        group.level = Logger.level.name;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
                 }
+            }
+        }, {
+            key: 'getLevel',
+            value: function getLevel() {
+                return Logger.level.name;
+            }
+        }, {
+            key: 'getGroup',
+            value: function getGroup(name) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = Logger.groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var group = _step2.value;
+
+                        if (group.name === name) {
+                            return group;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                return null;
+            }
+        }, {
+            key: 'addGroup',
+            value: function addGroup(name) {
+                var group = new Group(name);
+                Logger.groups.push(group);
+                return group;
             }
         }]);
 
         return Logger;
     }();
 
-    Logger._level = LEVELS.info;
-    Logger.messages = [];
-    Logger.nbMessages = 0;
+    Logger.level = LEVELS.info;
+    Logger.groups = [];
 
     var FSM = function () {
         function FSM(events) {
             var _this = this;
             this.state = events[0].from;
+            this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
+            Logger.setLevel('error');
             var _loop_1 = function _loop_1(event_1) {
                 if (!this_1.hasOwnProperty(event_1.name)) {
                     this_1[event_1.name] = function () {
-                        Logger.info('- Event ' + event_1.name + ' triggered');
+                        _this.log.info('- Event ' + event_1.name + ' triggered');
                         if (_this.state === event_1.from) {
                             _this.state = event_1.to;
-                            Logger.info('from ' + event_1.from + ' to ' + _this.state);
+                            _this.log.info('from ' + event_1.from + ' to ' + _this.state);
                             return true;
                         }
-                        Logger.warn('Cannot transition from ' + _this.state + ' to ' + event_1.to);
+                        _this.log.warn('Cannot transition from ' + _this.state + ' to ' + event_1.to);
                         return false;
                     };
                 }
