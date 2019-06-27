@@ -19,7 +19,7 @@ export class FSM { // FSM
   constructor (events : IEvent[]) {
     this.state = events[0].from;
     this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
-    Logger.setLevel('error');
+    // Logger.setLevel('error');
     for (let event of events) {
       if (!this.hasOwnProperty(event.name)) {
         this[event.name] = (): boolean => { //create event method

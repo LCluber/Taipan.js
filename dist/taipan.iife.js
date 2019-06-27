@@ -95,13 +95,13 @@ var Taipan = (function (exports) {
     }();
 
     var Group = function () {
-        function Group(name) {
+        function Group(name, level) {
             _classCallCheck(this, Group);
 
             this.messages = [];
             this.name = name;
             this.messages = [];
-            this._level = LEVELS.info;
+            this._level = level;
         }
 
         _createClass(Group, [{
@@ -220,7 +220,12 @@ var Taipan = (function (exports) {
         }, {
             key: 'addGroup',
             value: function addGroup(name) {
-                var group = new Group(name);
+                return this.getGroup(name) || this.pushGroup(name);
+            }
+        }, {
+            key: 'pushGroup',
+            value: function pushGroup(name) {
+                var group = new Group(name, Logger.level);
                 Logger.groups.push(group);
                 return group;
             }
@@ -229,7 +234,7 @@ var Taipan = (function (exports) {
         return Logger;
     }();
 
-    Logger.level = LEVELS.info;
+    Logger.level = LEVELS.error;
     Logger.groups = [];
 
     var FSM = function () {
@@ -237,7 +242,6 @@ var Taipan = (function (exports) {
             var _this = this;
             this.state = events[0].from;
             this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
-            Logger.setLevel('error');
             var _loop_1 = function _loop_1(event_1) {
                 if (!this_1.hasOwnProperty(event_1.name)) {
                     this_1[event_1.name] = function () {

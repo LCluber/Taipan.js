@@ -29,7 +29,6 @@ class FSM {
     constructor(events) {
         this.state = events[0].from;
         this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
-        Logger.setLevel('error');
         for (let event of events) {
             if (!this.hasOwnProperty(event.name)) {
                 this[event.name] = () => {

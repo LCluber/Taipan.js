@@ -1,3 +1,7 @@
+Version 0.3.10 (June 27th 2019)
+-----------------------------
+ * Updated Mouette logger for default level.
+
 Version 0.3.9 (June 23th 2019)
 -----------------------------
  * Updated Mouette logger for log groups management.
