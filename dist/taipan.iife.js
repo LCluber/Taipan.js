@@ -241,7 +241,7 @@ var Taipan = (function (exports) {
         function FSM(events) {
             var _this = this;
             this.state = events[0].from;
-            this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
+            this.log = Logger.addGroup('Taipan');
             var _loop_1 = function _loop_1(event_1) {
                 if (!this_1.hasOwnProperty(event_1.name)) {
                     this_1[event_1.name] = function () {

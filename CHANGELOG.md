@@ -1,3 +1,7 @@
+Version 0.3.11 (September 14th 2019)
+-----------------------------
+ * "state", "from" and "to" parameters can now be of type string, number or boolean.
+
 Version 0.3.10 (June 27th 2019)
 -----------------------------
  * Updated Mouette logger for default level.

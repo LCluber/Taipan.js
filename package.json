@@ -1,6 +1,6 @@
 {
   "name": "@lcluber/taipanjs",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "A finite state machine written in TypeScript",
   "keywords": [
     "finite state machine"

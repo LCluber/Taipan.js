@@ -28,7 +28,7 @@ import { Logger } from '@lcluber/mouettejs';
 class FSM {
     constructor(events) {
         this.state = events[0].from;
-        this.log = Logger.getGroup('Taipan') || Logger.addGroup('Taipan');
+        this.log = Logger.addGroup('Taipan');
         for (let event of events) {
             if (!this.hasOwnProperty(event.name)) {
                 this[event.name] = () => {

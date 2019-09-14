@@ -23,16 +23,16 @@
 * http://taipanjs.lcluber.com
 */
 export interface FSM {
-    state: string;
+    state: string | boolean | number;
     [key: string]: any;
 }
 export interface IEvent {
     name: string;
-    from: string;
-    to: string;
+    from: string | boolean | number;
+    to: string | boolean | number;
 }
 export declare class FSM {
-    state: string;
+    state: string | boolean | number;
     private log;
     constructor(events: IEvent[]);
 }
