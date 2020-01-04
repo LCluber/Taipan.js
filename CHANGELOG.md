@@ -1,3 +1,7 @@
+Version 0.3.12 (Jan 04th 2020)
+-----------------------------
+ * Updated Mouettejs to version 2.2.1.
+
 Version 0.3.11 (September 14th 2019)
 -----------------------------
  * "state", "from" and "to" parameters can now be of type string, number or boolean.

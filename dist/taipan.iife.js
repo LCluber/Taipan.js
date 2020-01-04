@@ -56,15 +56,15 @@ var Taipan = (function (exports) {
     */
 
     var LEVELS = {
-        info: { id: 1, name: 'info', color: '#28a745' },
-        trace: { id: 2, name: 'trace', color: '#17a2b8' },
-        warn: { id: 3, name: 'warn', color: '#ffc107' },
-        error: { id: 4, name: 'error', color: '#dc3545' },
-        off: { id: 99, name: 'off', color: null }
+        info: { id: 1, name: "info", color: "#28a745" },
+        trace: { id: 2, name: "trace", color: "#17a2b8" },
+        warn: { id: 3, name: "warn", color: "#ffc107" },
+        error: { id: 4, name: "error", color: "#dc3545" },
+        off: { id: 99, name: "off", color: null }
     };
 
     function addZero(value) {
-        return value < 10 ? '0' + value : value;
+        return value < 10 ? "0" + value : value;
     }
     function formatDate() {
         var now = new Date();
@@ -85,9 +85,9 @@ var Taipan = (function (exports) {
         }
 
         _createClass(Message, [{
-            key: 'display',
+            key: "display",
             value: function display(groupName) {
-                console[this.name]('%c[' + groupName + '] ' + this.date + ' : ', 'color:' + this.color + ';', this.content);
+                console[this.name]("%c[" + groupName + "] " + this.date + " : ", "color:" + this.color + ";", this.content);
             }
         }]);
 
@@ -101,45 +101,48 @@ var Taipan = (function (exports) {
             this.messages = [];
             this.name = name;
             this.messages = [];
-            this._level = level;
+            this.level = level;
         }
 
         _createClass(Group, [{
-            key: 'info',
+            key: "setLevel",
+            value: function setLevel(name) {
+                this.level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : this.level;
+                return this.getLevel();
+            }
+        }, {
+            key: "getLevel",
+            value: function getLevel() {
+                return this.level.name;
+            }
+        }, {
+            key: "info",
             value: function info(message) {
                 this.log(LEVELS.info, message);
             }
         }, {
-            key: 'trace',
+            key: "trace",
             value: function trace(message) {
                 this.log(LEVELS.trace, message);
             }
         }, {
-            key: 'warn',
+            key: "warn",
             value: function warn(message) {
                 this.log(LEVELS.warn, message);
             }
         }, {
-            key: 'error',
+            key: "error",
             value: function error(message) {
                 this.log(LEVELS.error, message);
             }
         }, {
-            key: 'log',
+            key: "log",
             value: function log(level, messageContent) {
                 var message = new Message(level, messageContent);
                 this.messages.push(message);
-                if (this._level.id <= message.id) {
+                if (this.level.id <= message.id) {
                     message.display(this.name);
                 }
-            }
-        }, {
-            key: 'level',
-            set: function set(name) {
-                this._level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : this._level;
-            },
-            get: function get() {
-                return this._level.name;
             }
         }]);
 
@@ -152,7 +155,7 @@ var Taipan = (function (exports) {
         }
 
         _createClass(Logger, null, [{
-            key: 'setLevel',
+            key: "setLevel",
             value: function setLevel(name) {
                 Logger.level = LEVELS.hasOwnProperty(name) ? LEVELS[name] : Logger.level;
                 var _iteratorNormalCompletion = true;
@@ -163,7 +166,7 @@ var Taipan = (function (exports) {
                     for (var _iterator = Logger.groups[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var group = _step.value;
 
-                        group.level = Logger.level.name;
+                        group.setLevel(Logger.level.name);
                     }
                 } catch (err) {
                     _didIteratorError = true;
@@ -179,14 +182,16 @@ var Taipan = (function (exports) {
                         }
                     }
                 }
+
+                return Logger.getLevel();
             }
         }, {
-            key: 'getLevel',
+            key: "getLevel",
             value: function getLevel() {
                 return Logger.level.name;
             }
         }, {
-            key: 'getGroup',
+            key: "getGroup",
             value: function getGroup(name) {
                 var _iteratorNormalCompletion2 = true;
                 var _didIteratorError2 = false;
@@ -218,12 +223,12 @@ var Taipan = (function (exports) {
                 return null;
             }
         }, {
-            key: 'addGroup',
+            key: "addGroup",
             value: function addGroup(name) {
                 return this.getGroup(name) || this.pushGroup(name);
             }
         }, {
-            key: 'pushGroup',
+            key: "pushGroup",
             value: function pushGroup(name) {
                 var group = new Group(name, Logger.level);
                 Logger.groups.push(group);
