@@ -34,7 +34,7 @@
     "cookie-parser": "1.4.3",
     "express": "4.14.1",
     "pug": "2.0.0-beta11",
-    "morgan": "1.8.1",
+    "morgan": "1.9.1",
     "serve-favicon": "2.4.0",
     "i18next": "19.0.2",
     "i18next-express-middleware": "1.0.2",
