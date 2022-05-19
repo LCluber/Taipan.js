@@ -15,7 +15,7 @@ switchOn(lights[fsm.state]);
 //turn requested light on if finite state machine authorizes it
 function changeLight(light){
   var eventName = light + 'On';
-  if(fsm[eventName]()) {
+  if (fsm.transitionTo(eventName)) {
     transition(); //switch lights off
     switchOn(lights[light]); //switch requested light on
   }

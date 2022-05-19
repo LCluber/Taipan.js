@@ -10,31 +10,106 @@ The main purpose of this library is to provide a simple way to handle sequential
 
 ## Installation
 
+### npm
+
 ```bash
-$ npm install @lcluber/taipanjs
+$ npm i @lcluber/taipanjs
 ```
-Or download it **[here](http://taipanjs.lcluber.com/#download)**.
 
-## Demo
+### yarn
 
-See a basic example **[here](http://taipanjs.lcluber.com/#example)**.
+```bash
+$ yarn add @lcluber/taipanjs
+```
 
 ## Usage
 
-Learn how to use it **[here](http://taipanjs.lcluber.com/#source)**.
+### ES6
+
+```javascript
+import { FSM } from '@lcluber/taipanjs';
+
+const fsm = new Taipan.FSM([
+  { name: 'greenOn',  from: 'red',  to: 'green' },
+  { name: 'orangeOn', from: 'green', to: 'orange' },
+  { name: 'redOn',    from: 'orange',  to: 'red' }
+]);
+
+function changeLight(light){
+  const eventName = `${light}On`;
+  if (fsm.transitionTo(eventName)) {
+    // switchOff(); //switch lights off
+    // switchOn(lights[light]); //switch requested light on
+  }
+}
+```
+
+### TypeScript
+
+```javascript
+import { FSM } from '@lcluber/taipanjs';
+
+const fsm:FSM = new Taipan.FSM([
+  { name: 'greenOn',  from: 'red',  to: 'green' },
+  { name: 'orangeOn', from: 'green', to: 'orange' },
+  { name: 'redOn',    from: 'orange',  to: 'red' }
+]);
+
+function changeLight(light: string){
+  const eventName = `${light}On`;
+  if (fsm.transitionTo(eventName)) {
+    // switchOff(); //switch lights off
+    // switchOn(lights[light]); //switch requested light on
+  }
+}
+```
+
+### IIFE
+
+```html
+<script src="node-modules/@lcluber/taipanjs/dist/taipan.iife.min.js"></script>
+```
+
+```javascript
+
+var fsm = new Taipan.FSM([
+  { name: 'greenOn',  from: 'red',  to: 'green' },
+  { name: 'orangeOn', from: 'green', to: 'orange' },
+  { name: 'redOn',    from: 'orange',  to: 'red' }
+]);
+
+function changeLight(light){
+  var eventName = `${light}On`;
+  if (fsm.transitionTo(eventName)) {
+    // switchOff(); //switch lights off
+    // switchOn(lights[light]); //switch requested light on
+  }
+}
+```
 
 ## API Reference
 
-Read the documentation **[here](http://taipanjs.lcluber.com/doc/)**.
+```javascript
 
-## Tests
+export interface IEvent {
+  name : string;
+  from : string|boolean|number;
+  to   : string|boolean|number;
+}
 
-No tests to run yet
+export declare class FSM {
+  state: string | boolean | number;
+  events: Events;
+  constructor(events: IEvent[]);
+  transitionTo(eventName: string): boolean;
+}
+
+```
 
 ## Contributors
 
-There is still a lot of work to do on this project and I would be glad to get all the help you can provide.
-To contribute you can clone the project on **[GitHub](https://github.com/LCluber/Taipan.js)** and see  **NOTICE.md** for detailed installation walkthrough of the project.
+Taipan.js is still in early development and I would be glad to get all the help you can provide for this project.
+To contribute you can clone the project on **[GitHub](https://github.com/LCluber/Taipan.js)** and see  **NOTICE.md** for detailed installation walkthrough.
 
 ## License
 

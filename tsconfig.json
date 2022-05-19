@@ -3,7 +3,8 @@
     "module": "ES6",
     "moduleResolution": "node",
     "target": "ES6",
-    "sourceMap": true,
+    "lib": ["dom", "es2015"],
+    "sourceMap": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -13,15 +14,13 @@
     "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors":false,
+    "suppressImplicitAnyIndexErrors": false,
     "allowJs": false,
     "removeComments": true,
-    "declaration":true,
+    "declaration": true,
     "declarationDir":"build/es6/",
-    "outDir":"build/es6/",
-    "rootDir":"src/ts/"
+    "outDir": "build/es6/",
+    "rootDir": "src/"
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

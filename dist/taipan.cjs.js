@@ -24,17 +24,29 @@ SOFTWARE.
 https://github.com/LCluber/Taipan.js
 */
 
-export interface Events {
-    [key: string]: Function;
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+class FSM {
+    constructor(events) {
+        this.events = {};
+        this.state = events[0].from;
+        for (let event of events) {
+            if (!this.hasOwnProperty(event.name)) {
+                this.events[event.name] = () => {
+                    if (this.state === event.from) {
+                        this.state = event.to;
+                        return true;
+                    }
+                    return false;
+                };
+            }
+        }
+    }
+    transitionTo(eventName) {
+        return this.events[eventName]();
+    }
 }
-export interface IEvent {
-    name: string;
-    from: string | boolean | number;
-    to: string | boolean | number;
-}
-export declare class FSM {
-    state: string | boolean | number;
-    events: Events;
-    constructor(events: IEvent[]);
-    transitionTo(eventName: string): boolean;
-}
+
+exports.FSM = FSM;

@@ -1,3 +1,8 @@
+Version 0.4.0 (May 20th 2022)
+-----------------------------
+ * Add method transitionTo() to transition between states
+ * Delete Mouettejs library.
+
 Version 0.3.12 (Jan 04th 2020)
 -----------------------------
  * Updated Mouettejs to version 2.2.1.

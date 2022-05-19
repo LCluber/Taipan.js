@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+
+  taipan:
+    build: ./
+    container_name: taipan
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
